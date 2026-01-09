@@ -1,0 +1,35 @@
+plugins {
+    id("java")
+    id("application")
+}
+
+plugins {
+    id 'com.diffplug.spotless' version "8.1.0"
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'de.gurkenlabs:litiengine:0.8.0'
+}
+
+
+sourceSets.main.java.srcDirs = ['src/']
+sourceSets.main.resources.srcDirs = ['assets/']
+
+tasks.register('runBaseDungeon', JavaExec) {
+    group 'starter'
+    mainClass = 'Starter'
+    classpath = sourceSets.main.runtimeClasspath
+}
+
+spotless {
+    java {
+        targetExclude('build/generated-src/**')
+        googleJavaFormat()
+
+        target '**/*.java'
+    }
+}
