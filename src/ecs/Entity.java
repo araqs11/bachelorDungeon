@@ -1,21 +1,27 @@
-package entities;
+package ecs;
 
-import components.Component;
+import ecs.components.Component;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.UUID;
 import java.util.stream.Stream;
 
-public class Entity extends de.gurkenlabs.litiengine.entities.Entity {
+public class Entity {
+
+  public static HashMap<UUID, Entity> allEntities = new HashMap<>();
 
   private ArrayList<Component> components = new ArrayList<>();
-
   private String name;
+  private UUID uuid;
 
   public Entity(String name) {
     this.name = name;
+    this.uuid = UUID.randomUUID();
   }
 
   public void addComponent(Component component) {
     components.add(component);
+    component.addToListOfEntities(this.uuid);
   }
 
   public Stream<Component> getComponents() {
@@ -28,5 +34,9 @@ public class Entity extends de.gurkenlabs.litiengine.entities.Entity {
 
   public void setName(String name) {
     this.name = name;
+  }
+
+  public UUID getUUID() {
+    return uuid;
   }
 }

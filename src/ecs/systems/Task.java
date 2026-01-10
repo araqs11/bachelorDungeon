@@ -1,4 +1,4 @@
-package systems;
+package ecs.systems;
 
 import java.util.concurrent.Callable;
 

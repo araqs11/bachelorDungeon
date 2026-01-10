@@ -1,6 +1,6 @@
-package components;
+package ecs.components;
 
-public class PositionComponent {
+public class PositionComponent extends Component {
 
   private int x;
   private int y;

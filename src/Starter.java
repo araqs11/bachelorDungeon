@@ -1,10 +1,40 @@
+import ecs.components.DrawComponent;
 import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.configuration.DisplayMode;
-import screens.GameLoop;
+import ecs.Entity;
+import game.entities.screens.GameLoop;
+import ecs.systems.InputSystem;
+import ecs.systems.VelocitySystem;
+import util.InputHandler;
 
 public class Starter {
 
+
   public static void main(String[] args) {
+    setupClient(args);
+    init();
+    Game.screens().display(new GameLoop()); // Game loop starts here
+    Game.start();
+  }
+
+  public static void init() {
+    InputHandler.init();
+    createSystems();
+    createTestEntities();
+  }
+
+  private static void createSystems() {
+    GameLoop.addSystem(new InputSystem());
+    GameLoop.addSystem(new VelocitySystem());
+  }
+
+  private static void createTestEntities() {
+    Entity player = new Entity("Player");
+    player.addComponent(new DrawComponent("player.png"));
+    GameLoop.addEntity(player);
+  }
+
+  private static void setupClient(String[] args) {
     Game.info().setName("Base Dungeon");
     Game.info().setSubTitle("");
     Game.info().setVersion("");
@@ -13,7 +43,7 @@ public class Starter {
     Game.config().graphics().setResolutionHeight(720);
     Game.config().graphics().setResolutionWidth(1280);
     Game.config().save();
-    Game.screens().display(new GameLoop()); // Game loop starts here
-    Game.start();
   }
+
+
 }

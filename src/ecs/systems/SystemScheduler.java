@@ -1,4 +1,4 @@
-package systems;
+package ecs.systems;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
@@ -17,7 +17,7 @@ public class SystemScheduler {
     mainTask.add(task);
   }
 
-  /** All scheduled systems do one execution upon calling this. */
+  /** All scheduled ecs.systems do one execution upon calling this. */
   public void tick() {
     try {
       executorService.invokeAll(mainTask);
