@@ -2,19 +2,17 @@ package game.entities.screens;
 
 import de.gurkenlabs.litiengine.gui.screens.GameScreen;
 import ecs.Entity;
-import java.awt.*;
-
 import ecs.systems.*;
 import ecs.systems.System;
+import java.awt.*;
 
 public class GameLoop extends GameScreen {
 
   public static Graphics2D graphics;
-  public static SystemScheduler scheduler = new SystemScheduler();;
+  public static SystemScheduler scheduler = new SystemScheduler();
+  ;
 
-  public GameLoop() {
-
-  }
+  public GameLoop() {}
 
   /**
    * Main game loop.
@@ -35,5 +33,4 @@ public class GameLoop extends GameScreen {
   public static void addSystem(System system) {
     scheduler.schedule(system);
   }
-
 }

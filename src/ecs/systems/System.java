@@ -1,8 +1,7 @@
 package ecs.systems;
 
-import ecs.components.Component;
 import ecs.Entity;
-
+import ecs.components.Component;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -11,13 +10,11 @@ import java.util.stream.Stream;
 
 public abstract class System implements Task {
 
-  private ArrayList<Component> listOfRelevantComponents = new ArrayList<>();
+  private ArrayList<Class<? extends Component>> listOfRelevantComponents = new ArrayList<>();
 
-  public System() {
+  public System() {}
 
-  }
-
-  public System(Component component) {
+  public System(Class<? extends Component> component) {
     listOfRelevantComponents.add(component);
   }
 
@@ -35,26 +32,35 @@ public abstract class System implements Task {
   public abstract void execute();
 
   private HashSet<UUID> getRelevantUUIDs() {
-    HashSet<UUID> listOfRelevantEntities;
-    if(listOfRelevantComponents.isEmpty()) {
+    HashSet<UUID> listOfRelevantEntities = new HashSet<>();
+    if (listOfRelevantComponents.isEmpty()) {
       // all game.entities
       listOfRelevantEntities = new HashSet<>(Entity.allEntities.keySet());
-    } else if(listOfRelevantComponents.size()==1) {
+    } else if (listOfRelevantComponents.size() == 1) {
       // only one
-      listOfRelevantEntities = new HashSet<>(listOfRelevantComponents.getFirst().getListOfEntities());
+      listOfRelevantEntities = Component.listOfEntities.get(listOfRelevantComponents.getFirst());
     } else {
       // x many
-      // geht incht weil nicht reTainAll genutzt
-      listOfRelevantEntities = new HashSet<>(listOfRelevantComponents.getFirst().getListOfEntities());
-      listOfRelevantComponents.stream().map(Component::getListOfEntities).forEach(listOfRelevantEntities::retainAll
-      );
+      // first check if every Component has been initialized, if yes continue, if no stop here since
+      // no fitting entities can be found
+      List<Class<? extends Component>> checkingList =
+          listOfRelevantComponents.stream().filter(Component.listOfEntities::containsKey).toList();
+      if (checkingList.size() == listOfRelevantComponents.size()) {
+        try {
+          listOfRelevantEntities =
+              Component.listOfEntities.get(listOfRelevantComponents.getFirst());
+          listOfRelevantComponents.stream()
+              .map(klass -> Component.listOfEntities.get(klass))
+              .forEach(listOfRelevantEntities::retainAll);
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
+      }
     }
-
     return listOfRelevantEntities;
   }
 
   public Stream<Entity> getRelevantEntities() {
-    return getRelevantUUIDs().stream()
-            .map(uuid->Entity.allEntities.get(uuid));
+    return getRelevantUUIDs().stream().map(uuid -> Entity.allEntities.get(uuid));
   }
 }

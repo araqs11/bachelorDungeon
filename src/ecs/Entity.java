@@ -21,7 +21,7 @@ public class Entity {
 
   public void addComponent(Component component) {
     components.add(component);
-    component.addToListOfEntities(this.uuid);
+    Component.addEntityToInternalComponent(component.getClass(), this.uuid);
   }
 
   public Stream<Component> getComponents() {

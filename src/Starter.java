@@ -1,15 +1,15 @@
-import ecs.components.DrawComponent;
 import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.configuration.DisplayMode;
+import de.gurkenlabs.litiengine.util.geom.Vector2D;
 import ecs.Entity;
-import game.entities.Player;
-import game.entities.screens.GameLoop;
+import ecs.components.VelocityComponent;
 import ecs.systems.InputSystem;
 import ecs.systems.VelocitySystem;
+import game.entities.Player;
+import game.entities.screens.GameLoop;
 import util.InputHandler;
 
 public class Starter {
-
 
   public static void main(String[] args) {
     setupClient(args);
@@ -31,6 +31,9 @@ public class Starter {
 
   private static void createTestEntities() {
     GameLoop.addEntity(Player.createPlayer());
+    Entity test = new Entity("test");
+    test.addComponent(new VelocityComponent(new Vector2D(1, 1)));
+    GameLoop.addEntity(test);
   }
 
   private static void setupClient(String[] args) {
@@ -43,6 +46,4 @@ public class Starter {
     Game.config().graphics().setResolutionWidth(1280);
     Game.config().save();
   }
-
-
 }

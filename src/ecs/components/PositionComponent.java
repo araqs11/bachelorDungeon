@@ -6,6 +6,7 @@ public class PositionComponent extends Component {
   private int y;
 
   public PositionComponent(int x, int y) {
+    super();
     this.x = x;
     this.y = y;
   }

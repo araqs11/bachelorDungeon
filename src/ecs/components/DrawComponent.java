@@ -8,6 +8,7 @@ public class DrawComponent extends Component {
   private BufferedImage image;
 
   public DrawComponent(String imagePath) {
+    super();
     this.image = Resources.images().get(imagePath);
   }
 
