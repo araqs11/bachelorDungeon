@@ -1,5 +1,6 @@
 package ecs.systems;
 
+import ecs.ECS;
 import ecs.Entity;
 import ecs.components.Component;
 import java.util.ArrayList;
@@ -36,17 +37,17 @@ public abstract class System implements Task {
     // first check if every Component has been initialized, if yes continue, if no stop here since
     // no fitting entities can be found
     List<Class<? extends Component>> checkingList =
-        listOfRelevantComponents.stream().filter(Component.listOfEntities::containsKey).toList();
+        listOfRelevantComponents.stream().filter(ECS.componentsToEntities::containsKey).toList();
     if (checkingList.size() == listOfRelevantComponents.size()) {
 
       if (listOfRelevantComponents.isEmpty()) {
-        listOfRelevantEntities = new HashSet<>(Entity.allEntities.keySet());
+        listOfRelevantEntities = new HashSet<>(ECS.allEntities.keySet());
       } else if (listOfRelevantComponents.size() == 1) {
-        listOfRelevantEntities = Component.listOfEntities.get(listOfRelevantComponents.getFirst());
+        listOfRelevantEntities = ECS.componentsToEntities.get(listOfRelevantComponents.getFirst());
       } else {
-        listOfRelevantEntities = Component.listOfEntities.get(listOfRelevantComponents.getFirst());
+        listOfRelevantEntities = ECS.componentsToEntities.get(listOfRelevantComponents.getFirst());
         listOfRelevantComponents.stream()
-            .map(klass -> Component.listOfEntities.get(klass))
+            .map(klass -> ECS.componentsToEntities.get(klass))
             .forEach(listOfRelevantEntities::retainAll);
       }
     }
@@ -54,6 +55,6 @@ public abstract class System implements Task {
   }
 
   public Stream<Entity> getRelevantEntities() {
-    return getRelevantUUIDs().stream().map(uuid -> Entity.allEntities.get(uuid));
+    return getRelevantUUIDs().stream().map(uuid -> ECS.allEntities.get(uuid));
   }
 }

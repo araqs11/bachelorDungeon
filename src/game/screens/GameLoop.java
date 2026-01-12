@@ -1,6 +1,7 @@
-package game.entities.screens;
+package game.screens;
 
 import de.gurkenlabs.litiengine.gui.screens.GameScreen;
+import ecs.ECS;
 import ecs.Entity;
 import ecs.systems.*;
 import ecs.systems.System;
@@ -27,7 +28,7 @@ public class GameLoop extends GameScreen {
   }
 
   public static void addEntity(Entity entity) {
-    Entity.allEntities.put(entity.getUUID(), entity);
+    ECS.allEntities.put(entity.getUUID(), entity);
   }
 
   public static void addSystem(System system) {

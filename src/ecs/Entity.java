@@ -8,8 +8,6 @@ import java.util.stream.Stream;
 
 public class Entity {
 
-  public static HashMap<UUID, Entity> allEntities = new HashMap<>();
-
   private ArrayList<Component> components = new ArrayList<>();
   private String name;
   private UUID uuid;

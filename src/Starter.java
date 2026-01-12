@@ -6,7 +6,7 @@ import ecs.components.VelocityComponent;
 import ecs.systems.InputSystem;
 import ecs.systems.VelocitySystem;
 import game.entities.Player;
-import game.entities.screens.GameLoop;
+import game.screens.GameLoop;
 import util.InputHandler;
 
 public class Starter {
