@@ -3,6 +3,7 @@ import de.gurkenlabs.litiengine.configuration.DisplayMode;
 import de.gurkenlabs.litiengine.util.geom.Vector2D;
 import ecs.Entity;
 import ecs.components.VelocityComponent;
+import ecs.systems.DrawSystem;
 import ecs.systems.InputSystem;
 import ecs.systems.VelocitySystem;
 import game.entities.Player;
@@ -27,6 +28,7 @@ public class Starter {
   private static void createSystems() {
     GameLoop.addSystem(new InputSystem());
     GameLoop.addSystem(new VelocitySystem());
+    GameLoop.addSystem(new DrawSystem());
   }
 
   private static void createTestEntities() {

@@ -12,6 +12,11 @@ public class VelocitySystem extends System {
 
   @Override
   public void execute() {
-    java.lang.System.out.println(getRelevantEntities().toList().size());
+    getRelevantEntities().forEach(entity -> {
+      PositionComponent pc = entity.fetch(PositionComponent.class).get();
+      VelocityComponent vc = entity.fetch(VelocityComponent.class).get();
+
+      pc.setPosition(pc.getX()+vc.getVelocity().getX(),pc.getY()+vc.getVelocity().getY());
+    });
   }
 }
