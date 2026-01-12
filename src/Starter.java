@@ -2,6 +2,7 @@ import ecs.components.DrawComponent;
 import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.configuration.DisplayMode;
 import ecs.Entity;
+import game.entities.Player;
 import game.entities.screens.GameLoop;
 import ecs.systems.InputSystem;
 import ecs.systems.VelocitySystem;
@@ -29,9 +30,7 @@ public class Starter {
   }
 
   private static void createTestEntities() {
-    Entity player = new Entity("Player");
-    player.addComponent(new DrawComponent("player.png"));
-    GameLoop.addEntity(player);
+    GameLoop.addEntity(Player.createPlayer());
   }
 
   private static void setupClient(String[] args) {

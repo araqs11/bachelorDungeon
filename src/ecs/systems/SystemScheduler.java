@@ -17,7 +17,7 @@ public class SystemScheduler {
     mainTask.add(task);
   }
 
-  /** All scheduled ecs.systems do one execution upon calling this. */
+  /** All scheduled systems do one execution upon calling this. */
   public void tick() {
     try {
       executorService.invokeAll(mainTask);
