@@ -33,28 +33,21 @@ public abstract class System implements Task {
 
   private HashSet<UUID> getRelevantUUIDs() {
     HashSet<UUID> listOfRelevantEntities = new HashSet<>();
-    if (listOfRelevantComponents.isEmpty()) {
-      // all game.entities
-      listOfRelevantEntities = new HashSet<>(Entity.allEntities.keySet());
-    } else if (listOfRelevantComponents.size() == 1) {
-      // only one
-      listOfRelevantEntities = Component.listOfEntities.get(listOfRelevantComponents.getFirst());
-    } else {
-      // x many
-      // first check if every Component has been initialized, if yes continue, if no stop here since
-      // no fitting entities can be found
-      List<Class<? extends Component>> checkingList =
-          listOfRelevantComponents.stream().filter(Component.listOfEntities::containsKey).toList();
-      if (checkingList.size() == listOfRelevantComponents.size()) {
-        try {
-          listOfRelevantEntities =
-              Component.listOfEntities.get(listOfRelevantComponents.getFirst());
-          listOfRelevantComponents.stream()
-              .map(klass -> Component.listOfEntities.get(klass))
-              .forEach(listOfRelevantEntities::retainAll);
-        } catch (Exception e) {
-          e.printStackTrace();
-        }
+    // first check if every Component has been initialized, if yes continue, if no stop here since
+    // no fitting entities can be found
+    List<Class<? extends Component>> checkingList =
+        listOfRelevantComponents.stream().filter(Component.listOfEntities::containsKey).toList();
+    if (checkingList.size() == listOfRelevantComponents.size()) {
+
+      if (listOfRelevantComponents.isEmpty()) {
+        listOfRelevantEntities = new HashSet<>(Entity.allEntities.keySet());
+      } else if (listOfRelevantComponents.size() == 1) {
+        listOfRelevantEntities = Component.listOfEntities.get(listOfRelevantComponents.getFirst());
+      } else {
+        listOfRelevantEntities = Component.listOfEntities.get(listOfRelevantComponents.getFirst());
+        listOfRelevantComponents.stream()
+            .map(klass -> Component.listOfEntities.get(klass))
+            .forEach(listOfRelevantEntities::retainAll);
       }
     }
     return listOfRelevantEntities;
