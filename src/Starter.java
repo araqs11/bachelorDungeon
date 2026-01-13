@@ -1,10 +1,7 @@
 import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.configuration.DisplayMode;
 import ecs.Entity;
-import ecs.systems.DrawSystem;
-import ecs.systems.InputSystem;
-import ecs.systems.PlayerInputSystem;
-import ecs.systems.VelocitySystem;
+import ecs.systems.*;
 import game.entities.Player;
 import game.screens.GameLoop;
 import util.InputHandler;
@@ -27,6 +24,7 @@ public class Starter {
   private static void createSystems() {
     GameLoop.addSystem(new InputSystem());
     GameLoop.addSystem(new VelocitySystem());
+    GameLoop.addSystem(new MoveSystem());
     GameLoop.addSystem(new PlayerInputSystem());
     GameLoop.addSystem(new DrawSystem());
   }

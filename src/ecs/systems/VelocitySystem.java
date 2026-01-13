@@ -21,8 +21,6 @@ public class VelocitySystem extends System {
               PositionComponent pc = entity.fetch(PositionComponent.class).get();
               VelocityComponent vc = entity.fetch(VelocityComponent.class).get();
 
-              pc.setPosition(
-                  pc.getX() + vc.getVelocity().getX(), pc.getY() + vc.getVelocity().getY());
               vc.setVelocity(vc.getVelocity().scale(FRICTION));
 
               if ((vc.getVelocity().getX() > 0 && vc.getVelocity().getX() < 0.1)
