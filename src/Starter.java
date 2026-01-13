@@ -1,8 +1,6 @@
 import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.configuration.DisplayMode;
-import de.gurkenlabs.litiengine.util.geom.Vector2D;
 import ecs.Entity;
-import ecs.components.VelocityComponent;
 import ecs.systems.DrawSystem;
 import ecs.systems.InputSystem;
 import ecs.systems.PlayerInputSystem;

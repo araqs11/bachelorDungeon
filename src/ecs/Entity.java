@@ -1,15 +1,13 @@
 package ecs;
 
 import ecs.components.Component;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Stream;
 
 public class Entity {
 
-  private HashMap<Class<? extends Component>,Component> components = new HashMap<>();
+  private HashMap<Class<? extends Component>, Component> components = new HashMap<>();
   private String name;
   private UUID uuid;
 
@@ -19,7 +17,7 @@ public class Entity {
   }
 
   public void addComponent(Component component) {
-    components.put(component.getClass(),component);
+    components.put(component.getClass(), component);
     Component.addEntityToInternalComponent(component.getClass(), this.uuid);
   }
 
@@ -38,5 +36,4 @@ public class Entity {
   public <T extends Component> Optional<T> fetch(Class<T> klass) {
     return Optional.ofNullable(klass.cast(components.get(klass)));
   }
-
 }
