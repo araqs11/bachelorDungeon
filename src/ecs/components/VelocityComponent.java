@@ -18,4 +18,8 @@ public class VelocityComponent extends Component {
   public void setVelocity(Vector2D velocity) {
     this.velocity = velocity;
   }
+
+  public void addVelocity(Vector2D velocity) {
+    this.velocity = this.velocity.add(velocity);
+  }
 }

@@ -5,6 +5,7 @@ import ecs.Entity;
 import ecs.components.VelocityComponent;
 import ecs.systems.DrawSystem;
 import ecs.systems.InputSystem;
+import ecs.systems.PlayerInputSystem;
 import ecs.systems.VelocitySystem;
 import game.entities.Player;
 import game.screens.GameLoop;
@@ -28,13 +29,13 @@ public class Starter {
   private static void createSystems() {
     GameLoop.addSystem(new InputSystem());
     GameLoop.addSystem(new VelocitySystem());
+    GameLoop.addSystem(new PlayerInputSystem());
     GameLoop.addSystem(new DrawSystem());
   }
 
   private static void createTestEntities() {
     GameLoop.addEntity(Player.createPlayer());
     Entity test = new Entity("test");
-    test.addComponent(new VelocityComponent(new Vector2D(1, 1)));
     GameLoop.addEntity(test);
   }
 
