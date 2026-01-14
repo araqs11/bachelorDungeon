@@ -1,7 +1,10 @@
 import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.configuration.DisplayMode;
 import ecs.Entity;
+import ecs.components.DrawComponent;
+import ecs.components.PositionComponent;
 import ecs.systems.*;
+import game.PositionCamera;
 import game.entities.Player;
 import game.screens.GameLoop;
 import util.InputHandler;
@@ -32,6 +35,8 @@ public class Starter {
   private static void createTestEntities() {
     GameLoop.addEntity(Player.createPlayer());
     Entity test = new Entity("test");
+    test.addComponent(new PositionComponent(1,1));
+    test.addComponent(new DrawComponent("enemy.png"));
     GameLoop.addEntity(test);
   }
 
