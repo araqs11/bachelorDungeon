@@ -6,6 +6,7 @@ import ecs.components.PositionComponent;
 import ecs.systems.*;
 import game.PositionCamera;
 import game.entities.Player;
+import game.level.LevelLoader;
 import game.screens.GameLoop;
 import util.InputHandler;
 
@@ -15,6 +16,7 @@ public class Starter {
     setupClient(args);
     init();
     Game.screens().display(new GameLoop()); // Game loop starts here
+    LevelLoader.loadFile("default.level");
     Game.start();
   }
 
@@ -29,13 +31,14 @@ public class Starter {
     GameLoop.addSystem(new VelocitySystem());
     GameLoop.addSystem(new MoveSystem());
     GameLoop.addSystem(new PlayerInputSystem());
+    GameLoop.addSystem(new LevelSystem());
     GameLoop.addSystem(new DrawSystem());
   }
 
   private static void createTestEntities() {
     GameLoop.addEntity(Player.createPlayer());
     Entity test = new Entity("test");
-    test.addComponent(new PositionComponent(1,1));
+    test.addComponent(new PositionComponent(50,0));
     test.addComponent(new DrawComponent("enemy.png"));
     GameLoop.addEntity(test);
   }
