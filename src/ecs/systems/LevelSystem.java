@@ -12,7 +12,7 @@ public class LevelSystem extends System{
     @Override
     public void execute() {
         LevelLoader.getLevel("default").getLayout().forEach((point,tile) -> {
-            Game.graphics().renderImage(GameLoop.graphics,tile.getTexture(),point);
+            Game.graphics().renderImage(GameLoop.graphics,tile.getTexture().getScaledInstance(tile.getTexture().getWidth()*GameLoop.ZOOM,tile.getTexture().getHeight()*GameLoop.ZOOM,1),point);
         });
     }
 }

@@ -42,7 +42,7 @@ public class Starter {
   private static void createTestEntities() {
     ECS.addEntity(Player.createPlayer());
     Entity test = new Entity("test");
-    test.addComponent(new PositionComponent(2,1));
+    test.addComponent(new PositionComponent(32,16));
     test.addComponent(new DrawComponent("entities/enemy.png"));
     ECS.addEntity(test);
   }
@@ -56,8 +56,6 @@ public class Starter {
     Game.config().graphics().setDisplayMode(DisplayMode.WINDOWED);
     Game.config().graphics().setResolutionHeight(720);
     Game.config().graphics().setResolutionWidth(1280);
-    System.out.println(Game.config().graphics().enableResolutionScaling());
-    Game.config().graphics().setEnableResolutionScale(false);
     Game.config().save();
   }
 }

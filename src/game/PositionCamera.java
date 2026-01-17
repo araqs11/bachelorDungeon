@@ -3,6 +3,7 @@ package game;
 import de.gurkenlabs.litiengine.graphics.Camera;
 import ecs.Entity;
 import ecs.components.PositionComponent;
+import game.screens.GameLoop;
 
 import java.awt.geom.Point2D;
 
@@ -11,6 +12,8 @@ public class PositionCamera extends Camera {
 
     public PositionCamera(Entity entity) {
         this.entity = entity;
+        this.setClampToMap(true);
+        this.setZoom(GameLoop.ZOOM,0);
     }
 
     @Override

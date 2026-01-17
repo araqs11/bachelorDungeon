@@ -10,6 +10,7 @@ import java.awt.*;
 public class GameLoop extends GameScreen {
 
   public static Graphics2D graphics;
+  public final static int ZOOM = 3;
 
   public GameLoop() {}
 
