@@ -1,5 +1,6 @@
 import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.configuration.DisplayMode;
+import de.gurkenlabs.litiengine.graphics.RenderEngine;
 import ecs.ECS;
 import ecs.Entity;
 import ecs.components.DrawComponent;
@@ -10,11 +11,14 @@ import game.level.LevelLoader;
 import game.screens.GameLoop;
 import util.InputHandler;
 
+import java.lang.System;
+
 public class Starter {
 
   public static void main(String[] args) {
     setupClient(args);
     init();
+    Game.graphics().setBaseRenderScale(1f);
     Game.screens().display(new GameLoop()); // Game loop starts here
     LevelLoader.loadFile("level/default.level");
     Game.start();
@@ -38,7 +42,7 @@ public class Starter {
   private static void createTestEntities() {
     ECS.addEntity(Player.createPlayer());
     Entity test = new Entity("test");
-    test.addComponent(new PositionComponent(50,0));
+    test.addComponent(new PositionComponent(2,1));
     test.addComponent(new DrawComponent("entities/enemy.png"));
     ECS.addEntity(test);
   }
@@ -52,6 +56,8 @@ public class Starter {
     Game.config().graphics().setDisplayMode(DisplayMode.WINDOWED);
     Game.config().graphics().setResolutionHeight(720);
     Game.config().graphics().setResolutionWidth(1280);
+    System.out.println(Game.config().graphics().enableResolutionScaling());
+    Game.config().graphics().setEnableResolutionScale(false);
     Game.config().save();
   }
 }
