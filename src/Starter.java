@@ -1,10 +1,10 @@
 import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.configuration.DisplayMode;
+import ecs.ECS;
 import ecs.Entity;
 import ecs.components.DrawComponent;
 import ecs.components.PositionComponent;
 import ecs.systems.*;
-import game.PositionCamera;
 import game.entities.Player;
 import game.level.LevelLoader;
 import game.screens.GameLoop;
@@ -27,20 +27,20 @@ public class Starter {
   }
 
   private static void createSystems() {
-    GameLoop.addSystem(new InputSystem());
-    GameLoop.addSystem(new VelocitySystem());
-    GameLoop.addSystem(new MoveSystem());
-    GameLoop.addSystem(new PlayerInputSystem());
-    GameLoop.addSystem(new LevelSystem());
-    GameLoop.addSystem(new DrawSystem());
+    ECS.addSystem(new InputSystem());
+    ECS.addSystem(new VelocitySystem());
+    ECS.addSystem(new MoveSystem());
+    ECS.addSystem(new PlayerInputSystem());
+    ECS.addSystem(new LevelSystem());
+    ECS.addSystem(new DrawSystem());
   }
 
   private static void createTestEntities() {
-    GameLoop.addEntity(Player.createPlayer());
+    ECS.addEntity(Player.createPlayer());
     Entity test = new Entity("test");
     test.addComponent(new PositionComponent(50,0));
     test.addComponent(new DrawComponent("entities/enemy.png"));
-    GameLoop.addEntity(test);
+    ECS.addEntity(test);
   }
 
   private static void setupClient(String[] args) {

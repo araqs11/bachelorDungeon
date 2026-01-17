@@ -10,8 +10,6 @@ import java.awt.*;
 public class GameLoop extends GameScreen {
 
   public static Graphics2D graphics;
-  public static SystemScheduler scheduler = new SystemScheduler();
-  ;
 
   public GameLoop() {}
 
@@ -24,14 +22,7 @@ public class GameLoop extends GameScreen {
   public void render(Graphics2D g) {
     super.render(g);
     graphics = g;
-    scheduler.tick();
+    ECS.scheduler.tick();
   }
 
-  public static void addEntity(Entity entity) {
-    ECS.allEntities.put(entity.getUUID(), entity);
-  }
-
-  public static void addSystem(System system) {
-    scheduler.schedule(system);
-  }
 }
