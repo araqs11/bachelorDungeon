@@ -4,29 +4,27 @@ import de.gurkenlabs.litiengine.graphics.Camera;
 import ecs.Entity;
 import ecs.components.PositionComponent;
 import game.screens.GameLoop;
-
 import java.awt.geom.Point2D;
 
 public class PositionCamera extends Camera {
-    Entity entity;
+  Entity entity;
 
-    public PositionCamera(Entity entity) {
-        this.entity = entity;
-        this.setClampToMap(true);
-        this.setZoom(GameLoop.ZOOM,0);
-    }
+  public PositionCamera(Entity entity) {
+    this.entity = entity;
+    this.setClampToMap(true);
+    this.setZoom(GameLoop.ZOOM, 0);
+  }
 
-    @Override
-    public void updateFocus() {
-        final Point2D cameraLocation = this.getLockedCameraLocation();
+  @Override
+  public void updateFocus() {
+    final Point2D cameraLocation = this.getLockedCameraLocation();
 
-        this.setFocus(cameraLocation);
-        super.updateFocus();
-    }
+    this.setFocus(cameraLocation);
+    super.updateFocus();
+  }
 
-    protected Point2D getLockedCameraLocation() {
-        PositionComponent pc = this.entity.fetch(PositionComponent.class).get();
-        return new Point2D.Double(pc.getX(),pc.getY());
-    }
+  protected Point2D getLockedCameraLocation() {
+    PositionComponent pc = this.entity.fetch(PositionComponent.class).get();
+    return new Point2D.Double(pc.getX(), pc.getY());
+  }
 }
-

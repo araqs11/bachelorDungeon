@@ -1,8 +1,8 @@
 package game.level;
 
-public class WallTile extends Tile{
+public class WallTile extends Tile {
 
-    public WallTile() {
-        super("tiles/wall.png");
-    }
+  public WallTile() {
+    super("tiles/wall.png");
+  }
 }

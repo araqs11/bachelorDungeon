@@ -2,15 +2,13 @@ package game.screens;
 
 import de.gurkenlabs.litiengine.gui.screens.GameScreen;
 import ecs.ECS;
-import ecs.Entity;
 import ecs.systems.*;
-import ecs.systems.System;
 import java.awt.*;
 
 public class GameLoop extends GameScreen {
 
   public static Graphics2D graphics;
-  public final static int ZOOM = 3;
+  public static final int ZOOM = 3;
 
   public GameLoop() {}
 
@@ -25,5 +23,4 @@ public class GameLoop extends GameScreen {
     graphics = g;
     ECS.scheduler.tick();
   }
-
 }
