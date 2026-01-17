@@ -38,6 +38,7 @@ public class LevelLoader {
     private static Tile getTileFromChar(char c) {
         switch (c) {
             case 'F': return new FloorTile();
+            case 'W': return new WallTile();
             default: return new FloorTile();
         }
     }

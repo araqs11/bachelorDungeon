@@ -16,7 +16,7 @@ public class Starter {
     setupClient(args);
     init();
     Game.screens().display(new GameLoop()); // Game loop starts here
-    LevelLoader.loadFile("default.level");
+    LevelLoader.loadFile("level/default.level");
     Game.start();
   }
 
@@ -39,7 +39,7 @@ public class Starter {
     GameLoop.addEntity(Player.createPlayer());
     Entity test = new Entity("test");
     test.addComponent(new PositionComponent(50,0));
-    test.addComponent(new DrawComponent("enemy.png"));
+    test.addComponent(new DrawComponent("entities/enemy.png"));
     GameLoop.addEntity(test);
   }
 

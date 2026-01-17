@@ -13,7 +13,7 @@ public class Player {
 
   public static Entity createPlayer() {
     Entity player = new Entity("Player");
-    player.addComponent(new DrawComponent("player.png"));
+    player.addComponent(new DrawComponent("entities/player.png"));
     player.addComponent(new PositionComponent(0, 0));
     player.addComponent(new VelocityComponent(new Vector2D(0, 0)));
     player.addComponent(new PlayerComponent());
