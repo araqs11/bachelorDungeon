@@ -48,6 +48,7 @@ public class Starter {
     Game.info().setSubTitle("");
     Game.info().setVersion("");
     Game.init(args);
+    Game.config().client().setMaxFps(60);
     Game.config().graphics().setDisplayMode(DisplayMode.WINDOWED);
     Game.config().graphics().setResolutionHeight(720);
     Game.config().graphics().setResolutionWidth(1280);

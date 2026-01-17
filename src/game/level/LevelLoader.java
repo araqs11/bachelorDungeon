@@ -20,12 +20,12 @@ public class LevelLoader {
        try {
            Level level = new Level();
            for (int i = 1; i < levelAsString.length; i++) {
-               String line = levelAsString[i];
+               String line = levelAsString[i].strip();
                for (int j = 0; j < line.length(); j++) {
                    level.addTile(i*TILESIZE, j*TILESIZE,getTileFromChar(line.charAt(j)));
                }
            }
-           allLevels.put(levelAsString[0], level);
+           allLevels.put(levelAsString[0].strip(), level);
        } catch (Exception e) {
            Logger.getLogger("LevelLogger").severe("Error at loading level file: " + filename);
        }

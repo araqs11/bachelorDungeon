@@ -14,6 +14,5 @@ public class LevelSystem extends System{
         LevelLoader.getLevel("default").getLayout().forEach((point,tile) -> {
             Game.graphics().renderImage(GameLoop.graphics,tile.getTexture(),point);
         });
-
     }
 }
