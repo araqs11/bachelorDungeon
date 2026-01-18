@@ -39,7 +39,7 @@ public class Starter {
   private static void createTestEntities() {
     ECS.addEntity(Player.createPlayer());
     Entity test = new Entity("test");
-    test.addComponent(new PositionComponent(32, 16));
+    test.addComponent(new PositionComponent(2, 1));
     test.addComponent(new DrawComponent("entities/enemy.png"));
     ECS.addEntity(test);
   }

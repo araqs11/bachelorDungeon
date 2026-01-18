@@ -9,6 +9,7 @@ public class GameLoop extends GameScreen {
 
   public static Graphics2D graphics;
   public static final int ZOOM = 3;
+  public static final int RENDERSCALE = 16;
 
   public GameLoop() {}
 

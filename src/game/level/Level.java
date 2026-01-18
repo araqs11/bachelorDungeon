@@ -6,8 +6,10 @@ import java.util.HashMap;
 public class Level {
 
   private HashMap<Point, Tile> layout;
+  private String name;
 
-  public Level() {
+  public Level(String levelName) {
+    this.name = levelName;
     this.layout = new HashMap<>();
   }
 
@@ -17,5 +19,9 @@ public class Level {
 
   public HashMap<Point, Tile> getLayout() {
     return layout;
+  }
+
+  public String getName() {
+    return name;
   }
 }

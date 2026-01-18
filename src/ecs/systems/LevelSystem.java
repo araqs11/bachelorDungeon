@@ -9,7 +9,7 @@ public class LevelSystem extends System {
 
   @Override
   public void execute() {
-    LevelLoader.getLevel("default")
+    LevelLoader.getCurrentLevel()
         .getLayout()
         .forEach(
             (point, tile) -> {
@@ -21,7 +21,8 @@ public class LevelSystem extends System {
                               tile.getTexture().getWidth() * GameLoop.ZOOM,
                               tile.getTexture().getHeight() * GameLoop.ZOOM,
                               1),
-                      point);
+                      point.getX() * GameLoop.RENDERSCALE,
+                      point.getY() * GameLoop.RENDERSCALE);
             });
   }
 }

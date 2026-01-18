@@ -7,7 +7,8 @@ import util.Vector;
 
 public class VelocitySystem extends System {
 
-  private final double FRICTION = 0.7;
+  private final double FRICTION = 0.2;
+  private final double STOP_LIMIT = 0.1;
 
   public VelocitySystem() {
     super(List.of(VelocityComponent.class, PositionComponent.class));
@@ -23,12 +24,12 @@ public class VelocitySystem extends System {
 
               vc.setVelocity(vc.getVelocity().scale(FRICTION));
 
-              if ((vc.getVelocity().getX() > 0 && vc.getVelocity().getX() < 0.1)
-                  || (vc.getVelocity().getX() < 0 && vc.getVelocity().getX() > 0.1)) {
+              if ((vc.getVelocity().getX() > 0 && vc.getVelocity().getX() < STOP_LIMIT)
+                  || (vc.getVelocity().getX() < 0 && vc.getVelocity().getX() > STOP_LIMIT)) {
                 vc.setVelocity(Vector.of(0, vc.getVelocity().getY()));
               }
-              if ((vc.getVelocity().getY() > 0 && vc.getVelocity().getY() < 0.1)
-                  || (vc.getVelocity().getY() < 0 && vc.getVelocity().getY() > 0.1)) {
+              if ((vc.getVelocity().getY() > 0 && vc.getVelocity().getY() < STOP_LIMIT)
+                  || (vc.getVelocity().getY() < 0 && vc.getVelocity().getY() > STOP_LIMIT)) {
                 vc.setVelocity(Vector.of(vc.getVelocity().getX(), 0));
               }
             });

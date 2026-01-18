@@ -7,7 +7,7 @@ import util.Vector;
 
 public class PlayerInputSystem extends System {
 
-  private final double MOVEMENT_VELOCITY = 1.2;
+  private final double MOVEMENT_VELOCITY = 0.5;
 
   public PlayerInputSystem() {
     super(PlayerComponent.class);
