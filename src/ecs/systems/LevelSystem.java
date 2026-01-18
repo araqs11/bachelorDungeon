@@ -18,8 +18,8 @@ public class LevelSystem extends System {
                       GameLoop.graphics,
                       tile.getTexture()
                           .getScaledInstance(
-                              tile.getTexture().getWidth() * GameLoop.ZOOM,
-                              tile.getTexture().getHeight() * GameLoop.ZOOM,
+                              GameLoop.RENDERSCALE * GameLoop.ZOOM,
+                              GameLoop.RENDERSCALE * GameLoop.ZOOM,
                               1),
                       point.getX() * GameLoop.RENDERSCALE,
                       point.getY() * GameLoop.RENDERSCALE);

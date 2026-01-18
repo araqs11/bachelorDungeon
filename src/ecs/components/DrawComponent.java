@@ -16,7 +16,7 @@ public class DrawComponent extends Component {
 
   public Image getScaledImage() {
     return image.getScaledInstance(
-        image.getWidth() * GameLoop.ZOOM, image.getHeight() * GameLoop.ZOOM, 1);
+        GameLoop.RENDERSCALE * GameLoop.ZOOM, GameLoop.RENDERSCALE * GameLoop.ZOOM, 1);
   }
 
   public void setImage(BufferedImage image) {

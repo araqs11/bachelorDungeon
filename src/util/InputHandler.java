@@ -12,6 +12,7 @@ public class InputHandler {
     INPUT.put("BACKWARD", new InputInfo(KeyEvent.VK_S, false));
     INPUT.put("LEFT", new InputInfo(KeyEvent.VK_A, false));
     INPUT.put("RIGHT", new InputInfo(KeyEvent.VK_D, false));
+    INPUT.put("TESTING", new InputInfo(KeyEvent.VK_K, false));
   }
 
   public static void clearInputs() {
