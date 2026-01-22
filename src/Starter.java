@@ -2,6 +2,7 @@ import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.configuration.DisplayMode;
 import ecs.ECS;
 import ecs.Entity;
+import ecs.components.CollisionComponent;
 import ecs.components.DrawComponent;
 import ecs.components.PositionComponent;
 import ecs.systems.*;
@@ -9,6 +10,7 @@ import game.entities.Player;
 import game.level.LevelLoader;
 import game.screens.GameLoop;
 import util.InputHandler;
+import util.Vector;
 
 public class Starter {
 
@@ -33,6 +35,7 @@ public class Starter {
     ECS.addSystem(new VelocitySystem());
     ECS.addSystem(new MoveSystem());
     ECS.addSystem(new PlayerInputSystem());
+    ECS.addSystem(new CollisionSystem());
     ECS.addSystem(new LevelSystem());
     ECS.addSystem(new DrawSystem());
     ECS.addSystem(new TestingSystem());
@@ -42,6 +45,7 @@ public class Starter {
     ECS.addEntity(Player.createPlayer());
     Entity test = new Entity("test");
     test.addComponent(new PositionComponent(3, 3));
+    test.addComponent(new CollisionComponent(Vector.of(1, 1)));
     test.addComponent(new DrawComponent("entities/enemy.png"));
     ECS.addEntity(test);
   }
