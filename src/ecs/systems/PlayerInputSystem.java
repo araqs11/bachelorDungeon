@@ -2,6 +2,8 @@ package ecs.systems;
 
 import ecs.components.PlayerComponent;
 import ecs.components.VelocityComponent;
+import game.level.LevelLoader;
+import game.screens.GameLoop;
 import util.InputHandler;
 import util.Vector;
 
@@ -32,6 +34,17 @@ public class PlayerInputSystem extends System {
               if (InputHandler.INPUT.get("RIGHT").isPressed()) {
                 vc.addVelocity(Vector.of(MOVEMENT_VELOCITY, 0));
               }
+
+              if (InputHandler.INPUT.get("ZOOM_OUT").isPressed()) {
+                  GameLoop.ZOOM--;
+              }
+              if (InputHandler.INPUT.get("ZOOM_IN").isPressed()) {
+                  GameLoop.ZOOM++;
+              }
+              if (InputHandler.INPUT.get("NEXT_LEVEL").isPressed()) {
+                  LevelLoader.loadNextLevel();
+              }
+
             });
   }
 }

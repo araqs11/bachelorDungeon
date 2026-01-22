@@ -15,6 +15,7 @@ public class Starter {
     Game.graphics().setBaseRenderScale(1f);
     Game.screens().display(new GameLoop()); // Game loop starts here
     LevelLoader.loadFile("level/default.level");
+    LevelLoader.loadFile("level/default1.level");
     Game.start();
   }
 

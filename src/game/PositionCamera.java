@@ -12,13 +12,12 @@ public class PositionCamera extends Camera {
   public PositionCamera(Entity entity) {
     this.entity = entity;
     this.setClampToMap(true);
-    this.setZoom(GameLoop.ZOOM, 0);
   }
 
   @Override
   public void updateFocus() {
     final Point2D cameraLocation = this.getLockedCameraLocation();
-
+    this.setZoom(GameLoop.ZOOM, 0);
     this.setFocus(cameraLocation);
     super.updateFocus();
   }

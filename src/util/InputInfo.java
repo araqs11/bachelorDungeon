@@ -1,13 +1,26 @@
 package util;
 
+import de.gurkenlabs.litiengine.input.Input;
+import de.gurkenlabs.litiengine.input.Keyboard;
+
+import java.awt.event.KeyEvent;
+
 public class InputInfo {
 
   private int keycode;
   private boolean isPressed;
+  private int delay;
+  private long timeHolder;
 
-  public InputInfo(int keycode, boolean isPressed) {
+  public InputInfo(int keycode, boolean isPressed, int delay) {
     this.keycode = keycode;
     this.isPressed = isPressed;
+    this.delay = delay;
+    this.timeHolder = System.currentTimeMillis();
+  }
+
+  public InputInfo(int keycode, boolean isPressed) {
+    this(keycode,isPressed,0);
   }
 
   public int getKeycode() {
@@ -15,7 +28,14 @@ public class InputInfo {
   }
 
   public void setPressed(boolean pressed) {
-    isPressed = pressed;
+    if(timeHolder+delay<=System.currentTimeMillis()) {
+      isPressed = pressed;
+      timeHolder = System.currentTimeMillis();
+    }
+  }
+
+  public void clearPressed() {
+    isPressed = false;
   }
 
   public boolean isPressed() {
