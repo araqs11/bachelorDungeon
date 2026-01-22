@@ -1,6 +1,9 @@
 import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.configuration.DisplayMode;
 import ecs.ECS;
+import ecs.Entity;
+import ecs.components.DrawComponent;
+import ecs.components.PositionComponent;
 import ecs.systems.*;
 import game.entities.Player;
 import game.level.LevelLoader;
@@ -37,10 +40,10 @@ public class Starter {
 
   private static void createTestEntities() {
     ECS.addEntity(Player.createPlayer());
-    //    Entity test = new Entity("test");
-    //    test.addComponent(new PositionComponent(2, 1));
-    //    test.addComponent(new DrawComponent("entities/enemy.png"));
-    //    ECS.addEntity(test);
+    Entity test = new Entity("test");
+    test.addComponent(new PositionComponent(3, 3));
+    test.addComponent(new DrawComponent("entities/enemy.png"));
+    ECS.addEntity(test);
   }
 
   private static void setupClient(String[] args) {

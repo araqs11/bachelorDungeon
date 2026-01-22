@@ -36,15 +36,14 @@ public class PlayerInputSystem extends System {
               }
 
               if (InputHandler.INPUT.get("ZOOM_OUT").isPressed()) {
-                  GameLoop.ZOOM--;
+                GameLoop.ZOOM--;
               }
               if (InputHandler.INPUT.get("ZOOM_IN").isPressed()) {
-                  GameLoop.ZOOM++;
+                GameLoop.ZOOM++;
               }
               if (InputHandler.INPUT.get("NEXT_LEVEL").isPressed()) {
-                  LevelLoader.loadNextLevel();
+                LevelLoader.loadNextLevel();
               }
-
             });
   }
 }

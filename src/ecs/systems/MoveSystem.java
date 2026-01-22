@@ -36,16 +36,16 @@ public class MoveSystem extends System {
                       .getLayout()
                       .get(xPointBottomRight)
                       .isWallLike()) {
-                  double dx = vc.getVelocity().getX();
-                  if (dx<0) {
-                      // nach links gehen da negative velocity
-                      x = ((int)xNew)+1.001;
-                  } else if (dx>0) {
-                      // nach rechts gehen da positive velocity
-                      x = ((int)xNew)-0.001;
-                  }
+                double dx = vc.getVelocity().getX();
+                if (dx < 0) {
+                  // nach links gehen da negative velocity
+                  x = ((int) xNew) + 1.001;
+                } else if (dx > 0) {
+                  // nach rechts gehen da positive velocity
+                  x = ((int) xNew) - 0.001;
+                }
               } else {
-                  x = xNew;
+                x = xNew;
               }
 
               if (LevelLoader.getCurrentLevel().getLayout().get(yPointTopLeft).isWallLike()
@@ -53,16 +53,16 @@ public class MoveSystem extends System {
                       .getLayout()
                       .get(yPointBottomRight)
                       .isWallLike()) {
-                  double dy = vc.getVelocity().getY();
-                  if (dy<0) {
-                      // nach oben gehen da negative velocity
-                      y = ((int)yNew)+1.001;
-                  } else if (dy>0) {
-                      // nach unten gehen da positive velocity
-                      y = ((int) yNew) - 0.001;
-                  }
+                double dy = vc.getVelocity().getY();
+                if (dy < 0) {
+                  // nach oben gehen da negative velocity
+                  y = ((int) yNew) + 1.001;
+                } else if (dy > 0) {
+                  // nach unten gehen da positive velocity
+                  y = ((int) yNew) - 0.001;
+                }
               } else {
-                  y = yNew;
+                y = yNew;
               }
 
               pc.setPosition(x, y);
