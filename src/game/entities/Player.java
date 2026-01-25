@@ -15,7 +15,8 @@ public class Player {
     player.addComponent(new PositionComponent(1, 1));
     player.addComponent(new VelocityComponent(new Vector2D(0, 0)));
     player.addComponent(new PlayerComponent());
-    player.addComponent(new CollisionComponent(Vector.of(1, 1)));
+    CollisionComponent cc = new CollisionComponent(Vector.of(1, 1));
+    player.addComponent(cc);
     Game.world().setCamera(new PositionCamera(player));
     return player;
   }
