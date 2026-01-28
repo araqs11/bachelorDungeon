@@ -1,16 +1,11 @@
 import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.configuration.DisplayMode;
 import ecs.ECS;
-import ecs.Entity;
-import ecs.components.CollisionComponent;
-import ecs.components.DrawComponent;
-import ecs.components.PositionComponent;
 import ecs.systems.*;
-import game.entities.Player;
+import game.entities.EntityFactory;
 import game.level.LevelLoader;
 import game.screens.GameLoop;
 import util.InputHandler;
-import util.Vector;
 
 public class Starter {
 
@@ -42,12 +37,8 @@ public class Starter {
   }
 
   private static void createTestEntities() {
-    ECS.addEntity(Player.createPlayer());
-    Entity test = new Entity("test");
-    test.addComponent(new PositionComponent(3, 3));
-    test.addComponent(new CollisionComponent(Vector.of(1, 1)));
-    test.addComponent(new DrawComponent("entities/enemy.png"));
-    ECS.addEntity(test);
+    ECS.addEntity(EntityFactory.createPlayer());
+    ECS.addEntity(EntityFactory.createDummy(3,3));
   }
 
   private static void setupClient(String[] args) {
