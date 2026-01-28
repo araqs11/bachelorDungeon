@@ -19,12 +19,17 @@ public class DrawSystem extends System {
             entity -> {
               DrawComponent dc = entity.fetch(DrawComponent.class).get();
               PositionComponent pc = entity.fetch(PositionComponent.class).get();
-              Game.graphics()
-                  .renderImage(
-                      GameLoop.graphics,
-                      dc.getScaledImage(),
-                      pc.getX() * GameLoop.RENDERSCALE,
-                      pc.getY() * GameLoop.RENDERSCALE);
+              try {
+                Game.graphics()
+                    .renderImage(
+                        GameLoop.graphics,
+                        dc.getScaledImage(),
+                        pc.getX() * GameLoop.RENDERSCALE,
+                        pc.getY() * GameLoop.RENDERSCALE);
+                dc.nextImage();
+              } catch (Exception e) {
+                throw new RuntimeException(e);
+              }
             });
   }
 }

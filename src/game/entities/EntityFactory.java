@@ -22,7 +22,7 @@ public class EntityFactory {
       sm.addTransition("idle1", "idle2");
       sm.addTransition("idle2", "idle1");
 
-    player.addComponent(new DrawComponent(sm));
+    player.addComponent(new DrawComponent(sm,10));
     player.addComponent(new PositionComponent(1, 1));
     player.addComponent(new VelocityComponent(new Vector2D(0, 0)));
     player.addComponent(new PlayerComponent());
