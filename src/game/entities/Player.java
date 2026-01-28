@@ -16,6 +16,17 @@ public class Player {
     player.addComponent(new VelocityComponent(new Vector2D(0, 0)));
     player.addComponent(new PlayerComponent());
     CollisionComponent cc = new CollisionComponent(Vector.of(1, 1));
+    cc.collideEnter = (a,b) -> {
+      System.out.println(a.getName() + " collided with " + b.getName());
+    };
+
+    cc.collideHold = (a,b) -> {
+      System.out.println("collideHold");
+    };
+
+    cc.collideLeave = (a,b) -> {
+      System.out.println(a.getName() + " left the collision with " + b.getName());
+    };
     player.addComponent(cc);
     Game.world().setCamera(new PositionCamera(player));
     return player;
