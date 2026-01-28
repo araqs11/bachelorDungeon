@@ -3,15 +3,14 @@ package ecs.systems;
 import ecs.Entity;
 import ecs.components.CollisionComponent;
 import ecs.components.PositionComponent;
-
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class CollisionSystem extends System {
 
-    private HashSet<Pair> collisions;
-    private HashSet<Pair> newCollisions;
+  private HashSet<Pair> collisions;
+  private HashSet<Pair> newCollisions;
 
   public CollisionSystem() {
     super(List.of(CollisionComponent.class, PositionComponent.class));
@@ -39,24 +38,25 @@ public class CollisionSystem extends System {
 
               if (len1 < (cc1.getWidth() + cc2.getWidth()) / 2
                   && len2 < (cc1.getHeight() + cc2.getHeight()) / 2) {
-                  if(collisions.contains(pair)) {
-                      cc1.collideHold.accept(pair.e1,pair.e2);
-                      cc2.collideHold.accept(pair.e2,pair.e1);
-                  } else {
-                      cc1.collideEnter.accept(pair.e1,pair.e2);
-                      cc2.collideEnter.accept(pair.e2,pair.e1);
-                  }
-                  newCollisions.add(pair);
+                if (collisions.contains(pair)) {
+                  cc1.collideHold.accept(pair.e1, pair.e2);
+                  cc2.collideHold.accept(pair.e2, pair.e1);
+                } else {
+                  cc1.collideEnter.accept(pair.e1, pair.e2);
+                  cc2.collideEnter.accept(pair.e2, pair.e1);
+                }
+                newCollisions.add(pair);
               }
             });
-    collisions.forEach(oldCollision-> {
-        if(!newCollisions.contains(oldCollision)) {
+    collisions.forEach(
+        oldCollision -> {
+          if (!newCollisions.contains(oldCollision)) {
             CollisionComponent cc1 = oldCollision.e1.fetch(CollisionComponent.class).get();
             CollisionComponent cc2 = oldCollision.e2.fetch(CollisionComponent.class).get();
-            cc1.collideLeave.accept(oldCollision.e1,oldCollision.e2);
-            cc2.collideLeave.accept(oldCollision.e2,oldCollision.e1);
-        }
-    });
+            cc1.collideLeave.accept(oldCollision.e1, oldCollision.e2);
+            cc2.collideLeave.accept(oldCollision.e2, oldCollision.e1);
+          }
+        });
     collisions.clear();
     collisions.addAll(newCollisions);
   }
