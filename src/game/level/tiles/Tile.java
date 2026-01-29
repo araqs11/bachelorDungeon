@@ -1,4 +1,4 @@
-package game.level;
+package game.level.tiles;
 
 import de.gurkenlabs.litiengine.resources.Resources;
 import java.awt.image.BufferedImage;

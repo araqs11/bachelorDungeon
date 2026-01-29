@@ -1,4 +1,4 @@
-package game.level;
+package game.level.tiles;
 
 public class FloorTile extends Tile {
 

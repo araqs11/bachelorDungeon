@@ -1,6 +1,11 @@
 package game.level;
 
+import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.resources.Resources;
+import game.level.tiles.FloorTile;
+import game.level.tiles.Tile;
+import game.level.tiles.EmptyTile;
+import game.level.tiles.WallTile;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -24,11 +29,11 @@ public class LevelLoader {
       }
       allLevels.add(level);
     } catch (RuntimeException e) {
-      {
-        Logger.getLogger("LevelLogger").severe(e.getMessage() + " in level file: " + filename);
-      }
+      Logger.getLogger("LevelLogger").severe(e.getMessage() + " in level file: " + filename);
+      Game.exit();
     } catch (Exception e) {
       Logger.getLogger("LevelLogger").severe("Error at loading level file: " + filename);
+      Game.exit();
     }
   }
 
@@ -48,6 +53,7 @@ public class LevelLoader {
     return switch (c) {
       case 'F' -> new FloorTile();
       case 'W' -> new WallTile();
+      case ' ' -> new EmptyTile();
       default -> throw new RuntimeException("Invalid character: " + c);
     };
   }

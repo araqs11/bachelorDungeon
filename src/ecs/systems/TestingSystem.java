@@ -3,7 +3,7 @@ package ecs.systems;
 import ecs.components.PositionComponent;
 import ecs.components.VelocityComponent;
 import game.level.LevelLoader;
-import game.level.Tile;
+import game.level.tiles.Tile;
 import java.awt.*;
 import java.util.HashMap;
 import java.util.List;
