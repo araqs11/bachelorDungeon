@@ -28,7 +28,7 @@ public class DrawComponent extends Component {
   }
 
   public void nextImage() {
-    if(current_duration>=stateDuration) {
+    if (current_duration >= stateDuration) {
       stateMachine.nextState();
       current_duration = 0;
     } else {

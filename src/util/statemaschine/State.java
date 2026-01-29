@@ -1,7 +1,6 @@
 package util.statemaschine;
 
 import de.gurkenlabs.litiengine.resources.Resources;
-
 import java.awt.*;
 
 public class State {

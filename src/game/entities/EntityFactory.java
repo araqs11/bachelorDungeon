@@ -14,15 +14,15 @@ public class EntityFactory {
   public static Entity createPlayer() {
     Entity player = new Entity("Player");
 
-      StateMachine sm = new StateMachine();
+    StateMachine sm = new StateMachine();
 
-      sm.addState(new State("idle1","entities/player.png"));
-      sm.addState(new State("idle2","entities/enemy.png"));
+    sm.addState(new State("idle1", "entities/player.png"));
+    sm.addState(new State("idle2", "entities/enemy.png"));
 
-      sm.addTransition("idle1", "idle2");
-      sm.addTransition("idle2", "idle1");
+    sm.addTransition("idle1", "idle2");
+    sm.addTransition("idle2", "idle1");
 
-    player.addComponent(new DrawComponent(sm,10));
+    player.addComponent(new DrawComponent(sm, 10));
     player.addComponent(new PositionComponent(1, 1));
     player.addComponent(new VelocityComponent(new Vector2D(0, 0)));
     player.addComponent(new PlayerComponent());
@@ -34,7 +34,7 @@ public class EntityFactory {
 
     cc.collideHold =
         (a, b) -> {
-          //System.out.println("collideHold");
+          // System.out.println("collideHold");
         };
 
     cc.collideLeave =
@@ -47,12 +47,12 @@ public class EntityFactory {
   }
 
   public static Entity createDummy(int x, int y) {
-      Entity dummy = new Entity("dummy");
-      dummy.addComponent(new PositionComponent(x, y));
-      dummy.addComponent(new CollisionComponent(Vector.of(1, 1)));
-      StateMachine sm = new StateMachine();
-      sm.addState(new State("idle","entities/enemy.png"));
-      dummy.addComponent(new DrawComponent(sm));
-      return dummy;
+    Entity dummy = new Entity("dummy");
+    dummy.addComponent(new PositionComponent(x, y));
+    dummy.addComponent(new CollisionComponent(Vector.of(1, 1)));
+    StateMachine sm = new StateMachine();
+    sm.addState(new State("idle", "entities/enemy.png"));
+    dummy.addComponent(new DrawComponent(sm));
+    return dummy;
   }
 }
