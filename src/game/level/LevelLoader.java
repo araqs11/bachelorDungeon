@@ -23,6 +23,10 @@ public class LevelLoader {
         }
       }
       allLevels.add(level);
+    } catch (RuntimeException e) {
+      {
+        Logger.getLogger("LevelLogger").severe(e.getMessage());
+      }
     } catch (Exception e) {
       Logger.getLogger("LevelLogger").severe("Error at loading level file: " + filename);
     }
@@ -41,13 +45,10 @@ public class LevelLoader {
   }
 
   private static Tile getTileFromChar(char c) {
-    switch (c) {
-      case 'F':
-        return new FloorTile();
-      case 'W':
-        return new WallTile();
-      default:
-        return new FloorTile();
-    }
+    return switch (c) {
+      case 'F' -> new FloorTile();
+      case 'W' -> new WallTile();
+      default -> throw new RuntimeException("Invalid character in level file: " + c);
+    };
   }
 }

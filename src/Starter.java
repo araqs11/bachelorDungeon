@@ -5,6 +5,7 @@ import ecs.systems.*;
 import game.entities.EntityFactory;
 import game.level.LevelLoader;
 import game.screens.GameLoop;
+import java.util.logging.Level;
 import util.InputHandler;
 
 public class Starter {
@@ -15,7 +16,7 @@ public class Starter {
     Game.graphics().setBaseRenderScale(1f);
     Game.screens().display(new GameLoop()); // Game loop starts here
     LevelLoader.loadFile("level/default.level");
-    LevelLoader.loadFile("level/default1.level");
+    //    LevelLoader.loadFile("level/default1.level");
     Game.start();
   }
 
@@ -38,10 +39,11 @@ public class Starter {
 
   private static void createTestEntities() {
     ECS.addEntity(EntityFactory.createPlayer());
-    ECS.addEntity(EntityFactory.createDummy(3,3));
+    ECS.addEntity(EntityFactory.createDummy(3, 3));
   }
 
   private static void setupClient(String[] args) {
+    Game.log().setLevel(Level.WARNING);
     Game.info().setName("Base Dungeon");
     Game.info().setSubTitle("");
     Game.info().setVersion("");
