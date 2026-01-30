@@ -3,6 +3,8 @@ import de.gurkenlabs.litiengine.configuration.DisplayMode;
 import ecs.ECS;
 import ecs.systems.*;
 import game.entities.EntityFactory;
+import game.level.DefaultLevel;
+import game.level.EmptyLevel;
 import game.level.LevelLoader;
 import game.screens.GameLoop;
 import java.util.logging.Level;
@@ -15,8 +17,9 @@ public class Starter {
     init();
     Game.graphics().setBaseRenderScale(1f);
     Game.screens().display(new GameLoop()); // Game loop starts here
-    LevelLoader.loadFile("level/default.level");
-    //    LevelLoader.loadFile("level/default1.level");
+    LevelLoader.loadLevel("level/default.level", new DefaultLevel());
+    LevelLoader.loadLevel("level/default1.level", new EmptyLevel());
+    LevelLoader.loadNextLevel();
     Game.start();
   }
 
@@ -38,8 +41,7 @@ public class Starter {
   }
 
   private static void createTestEntities() {
-    ECS.addEntity(EntityFactory.createPlayer());
-    ECS.addEntity(EntityFactory.createDummy(3, 3));
+    ECS.addHero(EntityFactory.createPlayer());
   }
 
   private static void setupClient(String[] args) {

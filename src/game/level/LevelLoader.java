@@ -2,9 +2,10 @@ package game.level;
 
 import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.resources.Resources;
+import ecs.ECS;
+import game.level.tiles.EmptyTile;
 import game.level.tiles.FloorTile;
 import game.level.tiles.Tile;
-import game.level.tiles.EmptyTile;
 import game.level.tiles.WallTile;
 import java.util.ArrayList;
 import java.util.Optional;
@@ -13,21 +14,20 @@ import java.util.logging.Logger;
 /** Handles the file operation and storage for the LevelSystem. */
 public class LevelLoader {
 
-  private static final int TILESIZE = 16;
   private static ArrayList<Level> allLevels = new ArrayList<>();
-  private static int currentLevel = 0;
+  private static int currentLevel = -1;
 
-  public static void loadFile(String filename) {
+  public static void loadLevel(String filename, ILevel level) {
     String[] levelAsString = Resources.read(filename).split("\n");
     try {
-      Level level = new Level(levelAsString[0].strip());
+      Level stringLevel = new Level(levelAsString[0].strip(), level);
       for (int i = 1; i < levelAsString.length; i++) {
         String line = levelAsString[i].strip();
         for (int j = 0; j < line.length(); j++) {
-          level.addTile((i - 1), j, getTileFromChar(line.charAt(j)));
+          stringLevel.addTile((i - 1), j, getTileFromChar(line.charAt(j)));
         }
       }
-      allLevels.add(level);
+      allLevels.add(stringLevel);
     } catch (RuntimeException e) {
       Logger.getLogger("LevelLogger").severe(e.getMessage() + " in level file: " + filename);
       Game.exit();
@@ -46,7 +46,12 @@ public class LevelLoader {
   }
 
   public static void loadNextLevel() {
+    if(currentLevel >= 0 ) {
+      getCurrentLevel().getLevel().onLevelLeave();
+    }
     currentLevel++;
+    ECS.removeAllEntitiesButHero();
+    getCurrentLevel().getLevel().onLevelLoad();
   }
 
   private static Tile getTileFromChar(char c) {

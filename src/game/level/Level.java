@@ -8,10 +8,12 @@ public class Level {
 
   private HashMap<Point, Tile> layout;
   private String name;
+  private ILevel level;
 
-  public Level(String levelName) {
+  public Level(String levelName, ILevel level) {
     this.name = levelName;
     this.layout = new HashMap<>();
+    this.level = level;
   }
 
   public void addTile(int x, int y, Tile tile) {
@@ -24,5 +26,9 @@ public class Level {
 
   public String getName() {
     return name;
+  }
+
+  public ILevel getLevel() {
+    return level;
   }
 }

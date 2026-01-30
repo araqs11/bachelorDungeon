@@ -17,10 +17,10 @@ public class EntityFactory {
     StateMachine sm = new StateMachine();
 
     sm.addState(new State("idle1", "entities/player.png"));
-    sm.addState(new State("idle2", "entities/enemy.png"));
+//    sm.addState(new State("idle2", "entities/enemy.png"));
 
-    sm.addTransition("idle1", "idle2");
-    sm.addTransition("idle2", "idle1");
+//    sm.addTransition("idle1", "idle2");
+//    sm.addTransition("idle2", "idle1");
 
     player.addComponent(new DrawComponent(sm, 10));
     player.addComponent(new PositionComponent(1, 1));

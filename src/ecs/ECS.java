@@ -1,6 +1,7 @@
 package ecs;
 
 import ecs.components.Component;
+import ecs.components.DrawComponent;
 import ecs.systems.System;
 import ecs.systems.SystemScheduler;
 import java.util.HashMap;
@@ -13,6 +14,7 @@ public class ECS {
   public static HashMap<Class<? extends Component>, HashSet<UUID>> componentsToEntities =
       new HashMap<>();
   public static SystemScheduler scheduler = new SystemScheduler();
+  private static UUID heroUUID;
 
   public static void addEntity(Entity entity) {
     ECS.allEntities.put(entity.getUUID(), entity);
@@ -20,5 +22,29 @@ public class ECS {
 
   public static void addSystem(System system) {
     scheduler.schedule(system);
+  }
+
+  public static void removeEntity(Entity entity) {
+    ECS.allEntities.remove(entity.getUUID());
+    componentsToEntities.values().remove(entity.getUUID());
+  }
+
+  public static void addHero(Entity hero) {
+    heroUUID = hero.getUUID();
+    addEntity(hero);
+  }
+
+  public static Entity getHero() {
+    return allEntities.get(heroUUID);
+  }
+
+  public static UUID getHeroUUID() {
+    return heroUUID;
+  }
+
+  public static void removeAllEntitiesButHero() {
+    componentsToEntities.values().forEach(set -> set.removeIf(uuid -> !uuid.equals(heroUUID)));
+    allEntities.entrySet().removeIf(entry -> !entry.getKey().equals(heroUUID));
+
   }
 }

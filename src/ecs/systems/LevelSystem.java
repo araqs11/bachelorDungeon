@@ -24,5 +24,6 @@ public class LevelSystem extends System {
                       point.getX() * GameLoop.RENDERSCALE,
                       point.getY() * GameLoop.RENDERSCALE);
             });
+    LevelLoader.getCurrentLevel().getLevel().tick();
   }
 }
