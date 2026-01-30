@@ -3,7 +3,9 @@ package ecs.systems;
 import ecs.components.PositionComponent;
 import ecs.components.VelocityComponent;
 import game.level.LevelLoader;
+import game.level.tiles.Tile;
 import java.awt.*;
+import java.util.HashMap;
 import java.util.List;
 
 /** Checks if the new position of the entity is allowed. */
@@ -20,52 +22,64 @@ public class MoveSystem extends System {
             entity -> {
               PositionComponent pc = entity.fetch(PositionComponent.class).get();
               VelocityComponent vc = entity.fetch(VelocityComponent.class).get();
+              float x = (float) pc.getX();
+              float y = (float) pc.getY();
+              double velX = vc.getVelocity().getX();
+              double velY = vc.getVelocity().getY();
 
-              double x = pc.getX();
-              double y = pc.getY();
-              double xNew = x + vc.getVelocity().getX();
-              double yNew = y + vc.getVelocity().getY();
-
-              Point xPointTopLeft = new Point((int) xNew, (int) y);
-              Point xPointBottomRight = new Point((int) xNew + 1, (int) y);
-              Point yPointTopLeft = new Point((int) x, (int) yNew);
-              Point yPointBottomRight = new Point((int) x, (int) yNew + 1);
-
-              if (LevelLoader.getCurrentLevel().getLayout().get(xPointTopLeft).isWallLike()
-                  || LevelLoader.getCurrentLevel()
-                      .getLayout()
-                      .get(xPointBottomRight)
-                      .isWallLike()) {
-                double dx = vc.getVelocity().getX();
-                if (dx < 0) {
-                  // nach links gehen da negative velocity
-                  x = ((int) xNew) + 1.001;
-                } else if (dx > 0) {
-                  // nach rechts gehen da positive velocity
-                  x = ((int) xNew) - 0.001;
-                }
-              } else {
-                x = xNew;
+              // Move X
+              x += velX;
+              if (collidesWithWorld(x, y, 1, 1, LevelLoader.getCurrentLevel().getLayout())) {
+                  if (velX < 0) {
+                      x = (float) (Math.ceil(x) + 0.0001f);
+                  } else if (velX > 0) {
+                      x = (float) (Math.floor(x) - 0.0001f);
+                  }
               }
 
-              if (LevelLoader.getCurrentLevel().getLayout().get(yPointTopLeft).isWallLike()
-                  || LevelLoader.getCurrentLevel()
-                      .getLayout()
-                      .get(yPointBottomRight)
-                      .isWallLike()) {
-                double dy = vc.getVelocity().getY();
-                if (dy < 0) {
-                  // nach oben gehen da negative velocity
-                  y = ((int) yNew) + 1.001;
-                } else if (dy > 0) {
-                  // nach unten gehen da positive velocity
-                  y = ((int) yNew) - 0.001;
-                }
-              } else {
-                y = yNew;
+              // Move Y
+              y += velY;
+              if (collidesWithWorld(x, y, 1, 1, LevelLoader.getCurrentLevel().getLayout())) {
+                  if (velY < 0) {
+                      y = (float) (Math.ceil(y) + 0.0001f);
+                  } else if (velY > 0) {
+                      y = (float) (Math.floor(y) - 0.0001f);
+                  }
               }
-
               pc.setPosition(x, y);
             });
+  }
+
+  public static boolean collidesWithWorld(
+      float x, float y, float width, float height, HashMap<Point, Tile> world) {
+    // Bounding box in world (tile) coordinates
+    float left = x;
+    float right = x + width;
+    float top = y;
+    float bottom = y + height;
+
+    // Convert bounds to tile indices
+    int leftTile = (int) Math.floor(left);
+    int rightTile = (int) Math.floor(right - 0.0001f);
+    int topTile = (int) Math.floor(top);
+    int bottomTile = (int) Math.floor(bottom - 0.0001f);
+
+    // Check bounds (outside world = solid)
+    //        if (leftTile < 0 || topTile < 0 ||
+    //                rightTile >= world.length ||
+    //                bottomTile >= world[0].length) {
+    //            return true;
+    //        }
+
+    // Check all overlapped tiles
+    for (int tx = leftTile; tx <= rightTile; tx++) {
+      for (int ty = topTile; ty <= bottomTile; ty++) {
+        if (world.get(new Point(tx, ty)).isWallLike()) {
+          return true;
+        }
+      }
+    }
+
+    return false;
   }
 }

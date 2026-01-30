@@ -1,18 +1,19 @@
 package ecs.systems;
 
+import de.gurkenlabs.litiengine.Game;
+import ecs.components.PlayerComponent;
 import ecs.components.PositionComponent;
 import ecs.components.VelocityComponent;
-import game.level.LevelLoader;
-import game.level.tiles.Tile;
+import game.screens.GameLoop;
 import java.awt.*;
-import java.util.HashMap;
+import java.awt.geom.Rectangle2D;
 import java.util.List;
 import util.InputHandler;
 
 public class TestingSystem extends System {
 
   public TestingSystem() {
-    super(List.of(VelocityComponent.class, PositionComponent.class));
+    super(List.of(PlayerComponent.class));
   }
 
   @Override
@@ -23,21 +24,26 @@ public class TestingSystem extends System {
               if (!InputHandler.INPUT.get("TESTING").isPressed()) {
                 return;
               }
-              PositionComponent pc = entity.fetch(PositionComponent.class).get();
-              VelocityComponent vc = entity.fetch(VelocityComponent.class).get();
+                PositionComponent pc = entity.fetch(PositionComponent.class).get();
+                VelocityComponent vc = entity.fetch(VelocityComponent.class).get();
 
-              int currentX = (int) pc.getX();
-              int currentY = (int) pc.getY();
-
-              HashMap<Point, Tile> map = LevelLoader.getCurrentLevel().getLayout();
-              java.lang.System.out.println();
-              java.lang.System.out.println(map.get(new Point(currentX, currentY)).isWallLike());
-              java.lang.System.out.println(
-                  map.get(new Point(currentX + 1, currentY + 1)).isWallLike());
-
-              //                            pc.setPosition(
-              //                                    pc.getX() + vc.getVelocity().getX(), pc.getY() +
-              // vc.getVelocity().getY());
+              renderPoint(pc.getX()+0.5, pc.getY()+0.5);
             });
+  }
+
+  private void renderPoint(double x, double y) {
+    Rectangle2D rect1 =
+            new Rectangle2D.Double(
+                    x * GameLoop.RENDERSCALE, y * GameLoop.RENDERSCALE, 1, 1);
+    GameLoop.graphics.setColor(Color.RED);
+    Game.graphics().renderShape(GameLoop.graphics, rect1);
+  }
+
+  private void renderPoint(Point p, Color c) {
+    Rectangle2D rect1 =
+        new Rectangle2D.Double(
+            p.getX() * GameLoop.RENDERSCALE, p.getY() * GameLoop.RENDERSCALE, 2, 2);
+    GameLoop.graphics.setColor(c);
+    Game.graphics().renderShape(GameLoop.graphics, rect1);
   }
 }
