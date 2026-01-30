@@ -1,7 +1,6 @@
 package ecs;
 
 import ecs.components.Component;
-import ecs.components.DrawComponent;
 import ecs.systems.System;
 import ecs.systems.SystemScheduler;
 import java.util.HashMap;
@@ -45,6 +44,5 @@ public class ECS {
   public static void removeAllEntitiesButHero() {
     componentsToEntities.values().forEach(set -> set.removeIf(uuid -> !uuid.equals(heroUUID)));
     allEntities.entrySet().removeIf(entry -> !entry.getKey().equals(heroUUID));
-
   }
 }

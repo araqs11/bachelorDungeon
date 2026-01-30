@@ -24,6 +24,7 @@ public class PositionCamera extends Camera {
 
   protected Point2D getLockedCameraLocation() {
     PositionComponent pc = this.entity.fetch(PositionComponent.class).get();
-    return new Point2D.Double((pc.getX()+0.5) * GameLoop.RENDERSCALE, (pc.getY()+0.5) * GameLoop.RENDERSCALE);
+    return new Point2D.Double(
+        (pc.getX() + 0.5) * GameLoop.RENDERSCALE, (pc.getY() + 0.5) * GameLoop.RENDERSCALE);
   }
 }

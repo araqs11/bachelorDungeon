@@ -24,17 +24,16 @@ public class TestingSystem extends System {
               if (!InputHandler.INPUT.get("TESTING").isPressed()) {
                 return;
               }
-                PositionComponent pc = entity.fetch(PositionComponent.class).get();
-                VelocityComponent vc = entity.fetch(VelocityComponent.class).get();
+              PositionComponent pc = entity.fetch(PositionComponent.class).get();
+              VelocityComponent vc = entity.fetch(VelocityComponent.class).get();
 
-              renderPoint(pc.getX()+0.5, pc.getY()+0.5);
+              renderPoint(pc.getX() + 0.5, pc.getY() + 0.5);
             });
   }
 
   private void renderPoint(double x, double y) {
     Rectangle2D rect1 =
-            new Rectangle2D.Double(
-                    x * GameLoop.RENDERSCALE, y * GameLoop.RENDERSCALE, 1, 1);
+        new Rectangle2D.Double(x * GameLoop.RENDERSCALE, y * GameLoop.RENDERSCALE, 1, 1);
     GameLoop.graphics.setColor(Color.RED);
     Game.graphics().renderShape(GameLoop.graphics, rect1);
   }
