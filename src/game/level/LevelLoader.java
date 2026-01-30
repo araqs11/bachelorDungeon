@@ -14,13 +14,13 @@ import java.util.logging.Logger;
 /** Handles the file operation and storage for the LevelSystem. */
 public class LevelLoader {
 
-  private static ArrayList<Level> allLevels = new ArrayList<>();
+  private static ArrayList<LevelData> allLevels = new ArrayList<>();
   private static int currentLevel = -1;
 
   public static void loadLevel(String filename, ILevel level) {
     String[] levelAsString = Resources.read(filename).split("\n");
     try {
-      Level stringLevel = new Level(levelAsString[0].strip(), level);
+      LevelData stringLevel = new LevelData(levelAsString[0].strip(), level);
       for (int i = 1; i < levelAsString.length; i++) {
         String line = levelAsString[i].strip();
         for (int j = 0; j < line.length(); j++) {
@@ -37,16 +37,16 @@ public class LevelLoader {
     }
   }
 
-  public static Optional<Level> getLevel(String name) {
+  public static Optional<LevelData> getLevel(String name) {
     return allLevels.stream().filter(level -> level.getName().equals(name)).findFirst();
   }
 
-  public static Level getCurrentLevel() {
+  public static LevelData getCurrentLevel() {
     return allLevels.get(currentLevel);
   }
 
   public static void loadNextLevel() {
-    if(currentLevel >= 0 ) {
+    if (currentLevel >= 0) {
       getCurrentLevel().getLevel().onLevelLeave();
     }
     currentLevel++;

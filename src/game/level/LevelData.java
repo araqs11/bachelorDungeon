@@ -4,13 +4,13 @@ import game.level.tiles.Tile;
 import java.awt.*;
 import java.util.HashMap;
 
-public class Level {
+public class LevelData {
 
   private HashMap<Point, Tile> layout;
   private String name;
   private ILevel level;
 
-  public Level(String levelName, ILevel level) {
+  public LevelData(String levelName, ILevel level) {
     this.name = levelName;
     this.layout = new HashMap<>();
     this.level = level;
