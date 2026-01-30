@@ -11,6 +11,10 @@ import java.util.List;
 /** Checks if the new position of the entity is allowed. */
 public class MoveSystem extends System {
 
+  private static final float COLLIDER_WIDTH = 0.9f;
+  private static final float COLLIDER_HEIGHT = 0.9f;
+  private static final float EPSILON = 0.0001f;
+
   public MoveSystem() {
     super(List.of(VelocityComponent.class, PositionComponent.class));
   }
@@ -22,64 +26,79 @@ public class MoveSystem extends System {
             entity -> {
               PositionComponent pc = entity.fetch(PositionComponent.class).get();
               VelocityComponent vc = entity.fetch(VelocityComponent.class).get();
+
               float x = (float) pc.getX();
               float y = (float) pc.getY();
-              double velX = vc.getVelocity().getX();
-              double velY = vc.getVelocity().getY();
+              float velX = (float) vc.getVelocity().getX();
+              float velY = (float) vc.getVelocity().getY();
+
+              HashMap<Point, Tile> world = LevelLoader.getCurrentLevel().getLayout();
 
               // Move X
               x += velX;
-              if (collidesWithWorld(x, y, 1, 1, LevelLoader.getCurrentLevel().getLayout())) {
-                  if (velX < 0) {
-                      x = (float) (Math.ceil(x) + 0.0001f);
-                  } else if (velX > 0) {
-                      x = (float) (Math.floor(x) - 0.0001f);
-                  }
+
+              float colliderX = x + (1.0f - COLLIDER_WIDTH) / 2.0f;
+              float colliderY = y + (1.0f - COLLIDER_HEIGHT) / 2.0f;
+
+              if (collidesWithWorld(colliderX, colliderY, COLLIDER_WIDTH, COLLIDER_HEIGHT, world)) {
+                if (velX > 0) {
+                  // hit wall on the RIGHT
+                  float tileX = (float) Math.floor(colliderX + COLLIDER_WIDTH);
+                  colliderX = tileX - COLLIDER_WIDTH - EPSILON;
+                } else if (velX < 0) {
+                  // hit wall on the LEFT
+                  float tileX = (float) Math.ceil(colliderX);
+                  colliderX = tileX + EPSILON;
+                }
+                x = colliderX - (1.0f - COLLIDER_WIDTH) / 2.0f;
               }
 
               // Move Y
               y += velY;
-              if (collidesWithWorld(x, y, 1, 1, LevelLoader.getCurrentLevel().getLayout())) {
-                  if (velY < 0) {
-                      y = (float) (Math.ceil(y) + 0.0001f);
-                  } else if (velY > 0) {
-                      y = (float) (Math.floor(y) - 0.0001f);
-                  }
+
+              colliderX = x + (1.0f - COLLIDER_WIDTH) / 2.0f;
+              colliderY = y + (1.0f - COLLIDER_HEIGHT) / 2.0f;
+
+              if (collidesWithWorld(colliderX, colliderY, COLLIDER_WIDTH, COLLIDER_HEIGHT, world)) {
+
+                if (velY > 0) {
+                  // hit wall at the BOTTOM
+                  float tileY = (float) Math.floor(colliderY + COLLIDER_HEIGHT);
+                  colliderY = tileY - COLLIDER_HEIGHT - EPSILON;
+                } else if (velY < 0) {
+                  // hit wall at the TOP
+                  float tileY = (float) Math.ceil(colliderY);
+                  colliderY = tileY + EPSILON;
+                }
+
+                // convert collider position back to sprite position
+                y = colliderY - (1.0f - COLLIDER_HEIGHT) / 2.0f;
               }
+
               pc.setPosition(x, y);
             });
   }
 
   public static boolean collidesWithWorld(
       float x, float y, float width, float height, HashMap<Point, Tile> world) {
-    // Bounding box in world (tile) coordinates
     float left = x;
     float right = x + width;
     float top = y;
     float bottom = y + height;
 
-    // Convert bounds to tile indices
     int leftTile = (int) Math.floor(left);
-    int rightTile = (int) Math.floor(right - 0.0001f);
+    int rightTile = (int) Math.floor(right - EPSILON);
     int topTile = (int) Math.floor(top);
-    int bottomTile = (int) Math.floor(bottom - 0.0001f);
+    int bottomTile = (int) Math.floor(bottom - EPSILON);
 
-    // Check bounds (outside world = solid)
-    //        if (leftTile < 0 || topTile < 0 ||
-    //                rightTile >= world.length ||
-    //                bottomTile >= world[0].length) {
-    //            return true;
-    //        }
-
-    // Check all overlapped tiles
     for (int tx = leftTile; tx <= rightTile; tx++) {
       for (int ty = topTile; ty <= bottomTile; ty++) {
-        if (world.get(new Point(tx, ty)).isWallLike()) {
+        Tile tile = world.get(new Point(tx, ty));
+        if (tile != null && tile.isWallLike()) {
           return true;
         }
       }
     }
-
     return false;
   }
 }
