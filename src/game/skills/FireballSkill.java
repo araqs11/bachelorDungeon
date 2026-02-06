@@ -1,7 +1,7 @@
 package game.skills;
 
-import ecs.ECS;
-import ecs.Entity;
+import ecs.core.ECS;
+import ecs.core.Entity;
 import ecs.components.DrawComponent;
 import ecs.components.PositionComponent;
 import ecs.components.ProjectileComponent;

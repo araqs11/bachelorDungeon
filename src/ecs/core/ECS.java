@@ -1,12 +1,8 @@
-package ecs;
+package ecs.core;
 
-import ecs.components.Component;
-import ecs.systems.System;
-import ecs.systems.SystemScheduler;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.UUID;
-import java.util.logging.Logger;
 
 /** Collection for all the */
 public class ECS {

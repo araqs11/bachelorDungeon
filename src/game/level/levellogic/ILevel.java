@@ -1,4 +1,4 @@
-package game.level;
+package game.level.levellogic;
 
 public interface ILevel {
 

@@ -1,8 +1,8 @@
-package game.screens;
+package game;
 
 import de.gurkenlabs.litiengine.gui.screens.GameScreen;
-import ecs.ECS;
-import ecs.systems.*;
+import ecs.core.ECS;
+
 import java.awt.*;
 
 public class GameLoop extends GameScreen {

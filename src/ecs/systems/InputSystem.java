@@ -1,6 +1,7 @@
 package ecs.systems;
 
 import de.gurkenlabs.litiengine.input.Input;
+import ecs.core.System;
 import util.input.InputHandler;
 
 public class InputSystem extends System {

@@ -1,8 +1,8 @@
 package ecs.components;
 
-import de.gurkenlabs.litiengine.util.geom.Vector2D;
-import ecs.ECS;
-import ecs.Entity;
+import ecs.core.Component;
+import ecs.core.ECS;
+import ecs.core.Entity;
 import util.Vector;
 
 import java.util.function.Consumer;

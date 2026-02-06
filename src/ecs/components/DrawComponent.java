@@ -1,6 +1,7 @@
 package ecs.components;
 
-import game.screens.GameLoop;
+import ecs.core.Component;
+import game.GameLoop;
 import java.awt.*;
 import util.statemaschine.StateMachine;
 

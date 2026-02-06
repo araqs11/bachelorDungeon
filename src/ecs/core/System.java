@@ -1,8 +1,5 @@
-package ecs.systems;
+package ecs.core;
 
-import ecs.ECS;
-import ecs.Entity;
-import ecs.components.Component;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;

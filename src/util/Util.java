@@ -2,8 +2,7 @@ package util;
 
 import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.input.Input;
-import de.gurkenlabs.litiengine.util.geom.Vector2D;
-import game.screens.GameLoop;
+import game.GameLoop;
 
 import java.awt.geom.Point2D;
 

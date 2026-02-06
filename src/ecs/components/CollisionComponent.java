@@ -1,7 +1,8 @@
 package ecs.components;
 
 import de.gurkenlabs.litiengine.util.geom.Vector2D;
-import ecs.Entity;
+import ecs.core.Component;
+import ecs.core.Entity;
 import java.util.function.BiConsumer;
 
 public class CollisionComponent extends Component {

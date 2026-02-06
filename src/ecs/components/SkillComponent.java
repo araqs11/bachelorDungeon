@@ -1,5 +1,6 @@
 package ecs.components;
 
+import ecs.core.Component;
 import game.skills.Skill;
 
 import java.util.ArrayList;

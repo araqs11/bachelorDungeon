@@ -1,5 +1,6 @@
 package game.level;
 
+import game.level.levellogic.ILevel;
 import game.level.tiles.Tile;
 import java.awt.*;
 import java.util.HashMap;

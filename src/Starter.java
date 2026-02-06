@@ -1,12 +1,12 @@
 import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.configuration.DisplayMode;
-import ecs.ECS;
+import ecs.core.ECS;
 import ecs.systems.*;
-import game.entities.EntityFactory;
-import game.level.DefaultLevel;
-import game.level.EmptyLevel;
+import game.EntityFactory;
+import game.level.levellogic.DefaultLevel;
+import game.level.levellogic.EmptyLevel;
 import game.level.LevelLoader;
-import game.screens.GameLoop;
+import game.GameLoop;
 import java.util.logging.Level;
 import util.input.InputHandler;
 

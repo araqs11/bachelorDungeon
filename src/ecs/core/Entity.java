@@ -1,6 +1,5 @@
-package ecs;
+package ecs.core;
 
-import ecs.components.Component;
 import java.util.HashMap;
 import java.util.Optional;
 import java.util.UUID;

@@ -3,6 +3,7 @@ package ecs.systems;
 import ecs.components.PositionComponent;
 import ecs.components.ProjectileComponent;
 import ecs.components.VelocityComponent;
+import ecs.core.System;
 import game.level.LevelLoader;
 import game.level.tiles.Tile;
 import java.awt.*;

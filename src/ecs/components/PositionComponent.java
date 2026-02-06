@@ -1,6 +1,6 @@
 package ecs.components;
 
-import de.gurkenlabs.litiengine.util.geom.Vector2D;
+import ecs.core.Component;
 import util.Vector;
 
 public class PositionComponent extends Component {

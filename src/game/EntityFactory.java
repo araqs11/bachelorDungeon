@@ -1,10 +1,9 @@
-package game.entities;
+package game;
 
 import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.util.geom.Vector2D;
-import ecs.Entity;
+import ecs.core.Entity;
 import ecs.components.*;
-import game.PositionCamera;
 import game.skills.FireballSkill;
 import util.Vector;
 import util.statemaschine.State;

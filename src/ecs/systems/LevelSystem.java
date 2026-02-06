@@ -1,8 +1,9 @@
 package ecs.systems;
 
 import de.gurkenlabs.litiengine.Game;
+import ecs.core.System;
 import game.level.LevelLoader;
-import game.screens.GameLoop;
+import game.GameLoop;
 
 /** Handles rendering the level from the LevelLoader. */
 public class LevelSystem extends System {

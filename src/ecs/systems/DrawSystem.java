@@ -3,7 +3,8 @@ package ecs.systems;
 import de.gurkenlabs.litiengine.Game;
 import ecs.components.DrawComponent;
 import ecs.components.PositionComponent;
-import game.screens.GameLoop;
+import ecs.core.System;
+import game.GameLoop;
 import java.util.List;
 
 public class DrawSystem extends System {

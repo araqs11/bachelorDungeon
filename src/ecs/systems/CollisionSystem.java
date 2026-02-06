@@ -1,8 +1,10 @@
 package ecs.systems;
 
-import ecs.Entity;
+import ecs.core.Entity;
 import ecs.components.CollisionComponent;
 import ecs.components.PositionComponent;
+import ecs.core.System;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;

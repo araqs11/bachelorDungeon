@@ -1,6 +1,6 @@
 package game.skills;
 
-import ecs.Entity;
+import ecs.core.Entity;
 
 public abstract class Skill {
 

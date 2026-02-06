@@ -1,7 +1,7 @@
-package game.level;
+package game.level.levellogic;
 
-import ecs.ECS;
-import game.entities.EntityFactory;
+import ecs.core.ECS;
+import game.EntityFactory;
 
 public class DefaultLevel implements ILevel {
 

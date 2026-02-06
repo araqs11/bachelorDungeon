@@ -2,7 +2,8 @@ package game.level;
 
 import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.resources.Resources;
-import ecs.ECS;
+import ecs.core.ECS;
+import game.level.levellogic.ILevel;
 import game.level.tiles.EmptyTile;
 import game.level.tiles.FloorTile;
 import game.level.tiles.Tile;

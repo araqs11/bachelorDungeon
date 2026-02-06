@@ -1,6 +1,7 @@
 package ecs.components;
 
 import de.gurkenlabs.litiengine.util.geom.Vector2D;
+import ecs.core.Component;
 
 public class VelocityComponent extends Component {
 

@@ -1,14 +1,14 @@
 package ecs.systems;
 
 import de.gurkenlabs.litiengine.util.geom.Vector2D;
-import ecs.ECS;
-import ecs.Entity;
+import ecs.core.ECS;
+import ecs.core.Entity;
 import ecs.components.PositionComponent;
 import ecs.components.ProjectileComponent;
 import ecs.components.VelocityComponent;
-import util.Vector;
+import ecs.core.System;
 
-public class ProjectileSystem extends System{
+public class ProjectileSystem extends System {
 
     public ProjectileSystem() {
         super(ProjectileComponent.class);
