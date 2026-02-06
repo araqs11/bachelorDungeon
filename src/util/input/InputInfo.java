@@ -1,4 +1,4 @@
-package util;
+package util.input;
 
 public class InputInfo {
 

@@ -1,18 +1,18 @@
 package ecs.systems;
 
 import de.gurkenlabs.litiengine.input.Input;
-import util.InputHandler;
+import util.input.InputHandler;
 
 public class InputSystem extends System {
   @Override
   public void execute() {
     InputHandler.clearInputs();
-    InputHandler.INPUT
+    InputHandler.input
         .keySet()
         .forEach(
             (a) -> {
-              if (Input.keyboard().isPressed(InputHandler.INPUT.get(a).getKeycode())) {
-                InputHandler.INPUT.get(a).setPressed(true);
+              if (Input.keyboard().isPressed(InputHandler.input.get(a).getKeycode())) {
+                InputHandler.input.get(a).setPressed(true);
               }
             });
   }

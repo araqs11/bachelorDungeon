@@ -8,7 +8,7 @@ import game.level.EmptyLevel;
 import game.level.LevelLoader;
 import game.screens.GameLoop;
 import java.util.logging.Level;
-import util.InputHandler;
+import util.input.InputHandler;
 
 public class Starter {
 

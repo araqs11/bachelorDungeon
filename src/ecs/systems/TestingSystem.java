@@ -8,7 +8,7 @@ import game.screens.GameLoop;
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.util.List;
-import util.InputHandler;
+import util.input.InputHandler;
 
 public class TestingSystem extends System {
 
@@ -21,7 +21,7 @@ public class TestingSystem extends System {
     getRelevantEntities()
         .forEach(
             entity -> {
-              if (!InputHandler.INPUT.get("TESTING").isPressed()) {
+              if (!InputHandler.input.get("TESTING").isPressed()) {
                 return;
               }
               PositionComponent pc = entity.fetch(PositionComponent.class).get();
