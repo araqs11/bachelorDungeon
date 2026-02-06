@@ -1,6 +1,7 @@
 package ecs.systems;
 
 import ecs.components.PositionComponent;
+import ecs.components.ProjectileComponent;
 import ecs.components.VelocityComponent;
 import game.level.LevelLoader;
 import game.level.tiles.Tile;
@@ -31,8 +32,7 @@ public class MoveSystem extends System {
               float y = (float) pc.getY();
               float velX = (float) vc.getVelocity().getX();
               float velY = (float) vc.getVelocity().getY();
-
-              HashMap<Point, Tile> world = LevelLoader.getCurrentLevel().getLayout();
+              boolean hasHitwall = false;
 
               // Move X
               x += velX;
@@ -40,7 +40,7 @@ public class MoveSystem extends System {
               float colliderX = x + (1.0f - COLLIDER_WIDTH) / 2.0f;
               float colliderY = y + (1.0f - COLLIDER_HEIGHT) / 2.0f;
 
-              if (collidesWithWorld(colliderX, colliderY, COLLIDER_WIDTH, COLLIDER_HEIGHT, world)) {
+              if (collidesWithWorld(colliderX, colliderY, COLLIDER_WIDTH, COLLIDER_HEIGHT, LevelLoader.getCurrentLevel().getLayout())) {
                 if (velX > 0) {
                   // hit wall on the RIGHT
                   float tileX = (float) Math.floor(colliderX + COLLIDER_WIDTH);
@@ -51,6 +51,7 @@ public class MoveSystem extends System {
                   colliderX = tileX + EPSILON;
                 }
                 x = colliderX - (1.0f - COLLIDER_WIDTH) / 2.0f;
+                hasHitwall = true;
               }
 
               // Move Y
@@ -59,7 +60,7 @@ public class MoveSystem extends System {
               colliderX = x + (1.0f - COLLIDER_WIDTH) / 2.0f;
               colliderY = y + (1.0f - COLLIDER_HEIGHT) / 2.0f;
 
-              if (collidesWithWorld(colliderX, colliderY, COLLIDER_WIDTH, COLLIDER_HEIGHT, world)) {
+              if (collidesWithWorld(colliderX, colliderY, COLLIDER_WIDTH, COLLIDER_HEIGHT, LevelLoader.getCurrentLevel().getLayout())) {
 
                 if (velY > 0) {
                   // hit wall at the BOTTOM
@@ -73,7 +74,15 @@ public class MoveSystem extends System {
 
                 // convert collider position back to sprite position
                 y = colliderY - (1.0f - COLLIDER_HEIGHT) / 2.0f;
+                hasHitwall = true;
               }
+
+              if(hasHitwall) {
+                  entity.fetch(ProjectileComponent.class).ifPresent(projectileComponent -> {
+                       projectileComponent.getOnWallHit().accept(entity);
+                  });
+              }
+
 
               pc.setPosition(x, y);
             });

@@ -5,6 +5,7 @@ import de.gurkenlabs.litiengine.util.geom.Vector2D;
 import ecs.Entity;
 import ecs.components.*;
 import game.PositionCamera;
+import game.skills.FireballSkill;
 import util.Vector;
 import util.statemaschine.State;
 import util.statemaschine.StateMachine;
@@ -23,7 +24,7 @@ public class EntityFactory {
     //    sm.addTransition("idle2", "idle1");
 
     player.addComponent(new DrawComponent(sm, 10));
-    player.addComponent(new PositionComponent(1, 1));
+    player.addComponent(new PositionComponent(3, 1));
     player.addComponent(new VelocityComponent(new Vector2D(0, 0)));
     player.addComponent(new PlayerComponent());
     CollisionComponent cc = new CollisionComponent(Vector.of(1, 1));
@@ -42,6 +43,9 @@ public class EntityFactory {
           System.out.println(a.getName() + " left the collision with " + b.getName());
         };
     player.addComponent(cc);
+    SkillComponent sc = new SkillComponent();
+    sc.addSkill(new FireballSkill());
+    player.addComponent(sc);
     Game.world().setCamera(new PositionCamera(player));
     return player;
   }

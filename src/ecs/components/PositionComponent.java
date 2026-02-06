@@ -1,5 +1,8 @@
 package ecs.components;
 
+import de.gurkenlabs.litiengine.util.geom.Vector2D;
+import util.Vector;
+
 public class PositionComponent extends Component {
 
   private double x;
@@ -22,5 +25,9 @@ public class PositionComponent extends Component {
 
   public double getY() {
     return y;
+  }
+
+  public Vector getPosition() {
+    return Vector.of(x,y);
   }
 }

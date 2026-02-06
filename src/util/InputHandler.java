@@ -16,6 +16,7 @@ public class InputHandler {
     INPUT.put("ZOOM_OUT", new InputInfo(KeyEvent.VK_MINUS, false, 500));
     INPUT.put("ZOOM_IN", new InputInfo(KeyEvent.VK_PLUS, false, 500));
     INPUT.put("NEXT_LEVEL", new InputInfo(KeyEvent.VK_N, false, 1000));
+    INPUT.put("USE_SKILL", new InputInfo(KeyEvent.VK_E, false));
   }
 
   public static void clearInputs() {

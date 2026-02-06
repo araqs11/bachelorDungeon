@@ -36,4 +36,8 @@ public class Entity {
   public <T extends Component> Optional<T> fetch(Class<T> klass) {
     return Optional.ofNullable(klass.cast(components.get(klass)));
   }
+
+  public HashMap<Class<? extends Component>, Component> getComponents() {
+    return components;
+  }
 }

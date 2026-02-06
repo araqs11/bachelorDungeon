@@ -6,6 +6,7 @@ import ecs.systems.SystemScheduler;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.UUID;
+import java.util.logging.Logger;
 
 /** Collection for all the */
 public class ECS {
@@ -25,7 +26,9 @@ public class ECS {
 
   public static void removeEntity(Entity entity) {
     ECS.allEntities.remove(entity.getUUID());
-    componentsToEntities.values().remove(entity.getUUID());
+    entity.getComponents().forEach((aClass, component) -> {
+      componentsToEntities.get(aClass).remove(entity.getUUID());
+    });
   }
 
   public static void addHero(Entity hero) {

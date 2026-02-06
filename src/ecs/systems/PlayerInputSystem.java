@@ -1,6 +1,7 @@
 package ecs.systems;
 
 import ecs.components.PlayerComponent;
+import ecs.components.SkillComponent;
 import ecs.components.VelocityComponent;
 import game.level.LevelLoader;
 import game.screens.GameLoop;
@@ -33,6 +34,12 @@ public class PlayerInputSystem extends System {
               }
               if (InputHandler.INPUT.get("RIGHT").isPressed()) {
                 vc.addVelocity(Vector.of(MOVEMENT_VELOCITY, 0));
+              }
+
+              if(InputHandler.INPUT.get("USE_SKILL").isPressed()) {
+                  entity.fetch(SkillComponent.class).ifPresent(skillComponent -> {
+                      skillComponent.getCurrentSkill().execute(entity);
+                  });
               }
 
               if (InputHandler.INPUT.get("ZOOM_OUT").isPressed()) {
