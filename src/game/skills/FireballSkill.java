@@ -1,11 +1,8 @@
 package game.skills;
 
+import ecs.components.*;
 import ecs.core.ECS;
 import ecs.core.Entity;
-import ecs.components.DrawComponent;
-import ecs.components.PositionComponent;
-import ecs.components.ProjectileComponent;
-import ecs.components.VelocityComponent;
 import util.Util;
 import util.Vector;
 import util.statemaschine.State;
@@ -27,6 +24,19 @@ public class FireballSkill extends Skill {
 
         Vector endPoint = pc.getPosition().add(Util.getRelativeCursorPosition());
         fireball.addComponent(new ProjectileComponent(3f,1f,pc.getPosition(), endPoint));
+
+        CollisionComponent cc = new CollisionComponent(Vector.ZERO);
+
+        cc.collideEnter = (me, other) -> {
+            other.fetch(HealthComponent.class).ifPresent(hc -> {
+                    if(other.equals(caster)) {
+                        return;
+                    }
+                    hc.reduce(2);
+                    System.out.println(me.getName()+ " hit " + other.getName());
+            });
+        };
+        fireball.addComponent(cc);
         ECS.addEntity(fireball);
 
     }

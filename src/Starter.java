@@ -36,6 +36,7 @@ public class Starter {
     ECS.addSystem(new PlayerInputSystem());
     ECS.addSystem(new CollisionSystem());
     ECS.addSystem(new ProjectileSystem());
+    ECS.addSystem(new HealthSystem());
     ECS.addSystem(new LevelSystem());
     ECS.addSystem(new DrawSystem());
     ECS.addSystem(new TestingSystem());

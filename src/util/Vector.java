@@ -14,6 +14,7 @@ public class Vector extends Vector2D {
   }
 
   public static Vector2D ZERO = Vector.of(0,0);
+  public static Vector2D ONE = Vector.of(1,1);
 
   public double distance(Vector other) {
     return Math.sqrt(Math.pow(dX-other.dX,2)+Math.pow(dY-other.dY,2));
