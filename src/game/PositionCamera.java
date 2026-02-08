@@ -1,9 +1,8 @@
 package game;
 
 import de.gurkenlabs.litiengine.graphics.Camera;
-import ecs.core.Entity;
 import ecs.components.PositionComponent;
-
+import ecs.core.Entity;
 import java.awt.geom.Point2D;
 
 public class PositionCamera extends Camera {

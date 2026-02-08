@@ -4,10 +4,10 @@ import ecs.components.PlayerComponent;
 import ecs.components.SkillComponent;
 import ecs.components.VelocityComponent;
 import ecs.core.System;
-import game.level.LevelLoader;
 import game.GameLoop;
-import util.input.InputHandler;
+import game.level.LevelLoader;
 import util.Vector;
+import util.input.InputHandler;
 import util.input.InputName;
 
 public class PlayerInputSystem extends System {
@@ -28,29 +28,32 @@ public class PlayerInputSystem extends System {
               if (InputHandler.isPressed(InputName.FORWARD)) {
                 vc.addVelocity(Vector.of(0, -MOVEMENT_VELOCITY));
               }
-                if (InputHandler.isPressed(InputName.BACKWARD)) {
+              if (InputHandler.isPressed(InputName.BACKWARD)) {
                 vc.addVelocity(Vector.of(0, MOVEMENT_VELOCITY));
               }
-                if (InputHandler.isPressed(InputName.LEFT)) {
+              if (InputHandler.isPressed(InputName.LEFT)) {
                 vc.addVelocity(Vector.of(-MOVEMENT_VELOCITY, 0));
               }
-                if (InputHandler.isPressed(InputName.RIGHT)) {
+              if (InputHandler.isPressed(InputName.RIGHT)) {
                 vc.addVelocity(Vector.of(MOVEMENT_VELOCITY, 0));
               }
 
-                if (InputHandler.isPressed(InputName.USE_SKILL)) {
-                  entity.fetch(SkillComponent.class).ifPresent(skillComponent -> {
-                      skillComponent.getCurrentSkill().execute(entity);
-                  });
+              if (InputHandler.isPressed(InputName.USE_SKILL)) {
+                entity
+                    .fetch(SkillComponent.class)
+                    .ifPresent(
+                        skillComponent -> {
+                          skillComponent.getCurrentSkill().execute(entity);
+                        });
               }
 
-                if (InputHandler.isPressed(InputName.ZOOM_OUT)) {
+              if (InputHandler.isPressed(InputName.ZOOM_OUT)) {
                 GameLoop.ZOOM--;
               }
-                if (InputHandler.isPressed(InputName.ZOOM_IN)) {
+              if (InputHandler.isPressed(InputName.ZOOM_IN)) {
                 GameLoop.ZOOM++;
               }
-                if (InputHandler.isPressed(InputName.NEXT_LEVEL)) {
+              if (InputHandler.isPressed(InputName.NEXT_LEVEL)) {
                 LevelLoader.loadNextLevel();
               }
             });

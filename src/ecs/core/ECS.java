@@ -22,9 +22,12 @@ public class ECS {
 
   public static void removeEntity(Entity entity) {
     ECS.allEntities.remove(entity.getUUID());
-    entity.getComponents().forEach((aClass, component) -> {
-      componentsToEntities.get(aClass).remove(entity.getUUID());
-    });
+    entity
+        .getComponents()
+        .forEach(
+            (aClass, component) -> {
+              componentsToEntities.get(aClass).remove(entity.getUUID());
+            });
   }
 
   public static void addHero(Entity hero) {

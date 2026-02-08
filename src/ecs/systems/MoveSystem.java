@@ -41,7 +41,12 @@ public class MoveSystem extends System {
               float colliderX = x + (1.0f - COLLIDER_WIDTH) / 2.0f;
               float colliderY = y + (1.0f - COLLIDER_HEIGHT) / 2.0f;
 
-              if (collidesWithWorld(colliderX, colliderY, COLLIDER_WIDTH, COLLIDER_HEIGHT, LevelLoader.getCurrentLevel().getLayout())) {
+              if (collidesWithWorld(
+                  colliderX,
+                  colliderY,
+                  COLLIDER_WIDTH,
+                  COLLIDER_HEIGHT,
+                  LevelLoader.getCurrentLevel().getLayout())) {
                 if (velX > 0) {
                   // hit wall on the RIGHT
                   float tileX = (float) Math.floor(colliderX + COLLIDER_WIDTH);
@@ -61,7 +66,12 @@ public class MoveSystem extends System {
               colliderX = x + (1.0f - COLLIDER_WIDTH) / 2.0f;
               colliderY = y + (1.0f - COLLIDER_HEIGHT) / 2.0f;
 
-              if (collidesWithWorld(colliderX, colliderY, COLLIDER_WIDTH, COLLIDER_HEIGHT, LevelLoader.getCurrentLevel().getLayout())) {
+              if (collidesWithWorld(
+                  colliderX,
+                  colliderY,
+                  COLLIDER_WIDTH,
+                  COLLIDER_HEIGHT,
+                  LevelLoader.getCurrentLevel().getLayout())) {
 
                 if (velY > 0) {
                   // hit wall at the BOTTOM
@@ -78,12 +88,14 @@ public class MoveSystem extends System {
                 hasHitwall = true;
               }
 
-              if(hasHitwall) {
-                  entity.fetch(ProjectileComponent.class).ifPresent(projectileComponent -> {
-                       projectileComponent.getOnWallHit().accept(entity);
-                  });
+              if (hasHitwall) {
+                entity
+                    .fetch(ProjectileComponent.class)
+                    .ifPresent(
+                        projectileComponent -> {
+                          projectileComponent.getOnWallHit().accept(entity);
+                        });
               }
-
 
               pc.setPosition(x, y);
             });

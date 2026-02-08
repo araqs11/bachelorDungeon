@@ -4,6 +4,5 @@ import ecs.core.Entity;
 
 public abstract class Skill {
 
-    public abstract void execute(Entity caster);
-
+  public abstract void execute(Entity caster);
 }

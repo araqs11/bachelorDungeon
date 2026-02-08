@@ -6,21 +6,21 @@ import de.gurkenlabs.litiengine.util.geom.Vector2D;
 public class Vector extends Vector2D {
 
   public Vector(double x, double y) {
-    super(x,y);
+    super(x, y);
   }
 
   public static Vector of(double x, double y) {
     return new Vector(x, y);
   }
 
-  public static Vector2D ZERO = Vector.of(0,0);
-  public static Vector2D ONE = Vector.of(1,1);
+  public static Vector2D ZERO = Vector.of(0, 0);
+  public static Vector2D ONE = Vector.of(1, 1);
 
   public double distance(Vector other) {
-    return Math.sqrt(Math.pow(dX-other.dX,2)+Math.pow(dY-other.dY,2));
+    return Math.sqrt(Math.pow(dX - other.dX, 2) + Math.pow(dY - other.dY, 2));
   }
 
   public Vector add(Vector2D v1) {
-    return new Vector(dX+v1.getX(),dY+v1.getY());
+    return new Vector(dX + v1.getX(), dY + v1.getY());
   }
 }

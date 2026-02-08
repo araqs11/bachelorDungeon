@@ -28,6 +28,6 @@ public class PositionComponent extends Component {
   }
 
   public Vector getPosition() {
-    return Vector.of(x,y);
+    return Vector.of(x, y);
   }
 }

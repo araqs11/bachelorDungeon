@@ -2,9 +2,8 @@ package ecs.systems;
 
 import ecs.components.PositionComponent;
 import ecs.components.VelocityComponent;
-import java.util.List;
-
 import ecs.core.System;
+import java.util.List;
 import util.Vector;
 
 public class VelocitySystem extends System {

@@ -1,7 +1,6 @@
 package ecs.core;
 
 import java.util.HashSet;
-import java.util.UUID;
 
 public abstract class Component {
 
@@ -10,5 +9,4 @@ public abstract class Component {
       ECS.componentsToEntities.put(this.getClass(), new HashSet<>());
     }
   }
-
 }
