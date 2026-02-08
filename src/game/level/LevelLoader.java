@@ -4,10 +4,7 @@ import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.resources.Resources;
 import ecs.core.ECS;
 import game.level.levellogic.ILevel;
-import game.level.tiles.EmptyTile;
-import game.level.tiles.FloorTile;
-import game.level.tiles.Tile;
-import game.level.tiles.WallTile;
+import game.level.tiles.*;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -59,6 +56,8 @@ public class LevelLoader {
     return switch (c) {
       case 'F' -> new FloorTile();
       case 'W' -> new WallTile();
+      case 'S' -> new StarterTile();
+      case 'E' -> new ExitTile();
       case ' ' -> new EmptyTile();
       default -> throw new RuntimeException("Invalid character: " + c);
     };

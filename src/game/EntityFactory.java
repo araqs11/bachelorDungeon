@@ -9,9 +9,11 @@ import util.Vector;
 import util.statemaschine.State;
 import util.statemaschine.StateMachine;
 
+import java.awt.*;
+
 public class EntityFactory {
 
-  public static Entity createPlayer() {
+  public static Entity createPlayer(double x, double  y) {
     Entity player = new Entity("Player");
 
     StateMachine sm = new StateMachine();
@@ -23,7 +25,7 @@ public class EntityFactory {
     //    sm.addTransition("idle2", "idle1");
 
     player.addComponent(new DrawComponent(sm, 10));
-    player.addComponent(new PositionComponent(3, 1));
+    player.addComponent(new PositionComponent(x,y));
     player.addComponent(new VelocityComponent(new Vector2D(0, 0)));
     player.addComponent(new PlayerComponent());
     CollisionComponent cc = new CollisionComponent(Vector.of(1, 1));
@@ -51,6 +53,10 @@ public class EntityFactory {
     player.addComponent(hc);
     Game.world().setCamera(new PositionCamera(player));
     return player;
+  }
+
+  public static Entity createPlayer(Point p) {
+    return createPlayer(p.getX(),p.getY());
   }
 
   public static Entity createDummy(int x, int y) {

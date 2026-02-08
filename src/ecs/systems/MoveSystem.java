@@ -5,6 +5,7 @@ import ecs.components.ProjectileComponent;
 import ecs.components.VelocityComponent;
 import ecs.core.System;
 import game.level.LevelLoader;
+import game.level.tiles.ExitTile;
 import game.level.tiles.Tile;
 import java.awt.*;
 import java.util.HashMap;
@@ -47,6 +48,7 @@ public class MoveSystem extends System {
                   COLLIDER_WIDTH,
                   COLLIDER_HEIGHT,
                   LevelLoader.getCurrentLevel().getLayout())) {
+
                 if (velX > 0) {
                   // hit wall on the RIGHT
                   float tileX = (float) Math.floor(colliderX + COLLIDER_WIDTH);
@@ -116,6 +118,9 @@ public class MoveSystem extends System {
     for (int tx = leftTile; tx <= rightTile; tx++) {
       for (int ty = topTile; ty <= bottomTile; ty++) {
         Tile tile = world.get(new Point(tx, ty));
+          if(tile instanceof ExitTile) {
+              LevelLoader.loadNextLevel();
+          }
         if (tile != null && tile.isWallLike()) {
           return true;
         }

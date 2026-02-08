@@ -5,9 +5,11 @@ import ecs.systems.*;
 import game.EntityFactory;
 import game.GameLoop;
 import game.level.LevelLoader;
-import game.level.levellogic.DefaultLevel;
+import game.level.levellogic.LevelOne;
 import game.level.levellogic.EmptyLevel;
 import java.util.logging.Level;
+
+import game.level.levellogic.LevelTwo;
 import util.input.InputHandler;
 
 public class Starter {
@@ -17,8 +19,8 @@ public class Starter {
     init();
     Game.graphics().setBaseRenderScale(1f);
     Game.screens().display(new GameLoop()); // Game loop starts here
-    LevelLoader.loadLevel("level/default.level", new DefaultLevel());
-    LevelLoader.loadLevel("level/default1.level", new EmptyLevel());
+    LevelLoader.loadLevel("level/default.level", new LevelOne());
+    LevelLoader.loadLevel("level/default1.level", new LevelTwo());
     LevelLoader.loadNextLevel();
     Game.start();
   }
@@ -43,7 +45,7 @@ public class Starter {
   }
 
   private static void createTestEntities() {
-    ECS.addHero(EntityFactory.createPlayer());
+    ECS.addHero(EntityFactory.createPlayer(1,1));
   }
 
   private static void setupClient(String[] args) {
