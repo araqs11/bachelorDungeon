@@ -8,6 +8,7 @@ import game.level.LevelLoader;
 import game.level.tiles.ExitTile;
 import game.level.tiles.Tile;
 import java.awt.*;
+import java.awt.geom.Point2D;
 import java.util.HashMap;
 import java.util.List;
 
@@ -16,6 +17,7 @@ public class MoveSystem extends System {
 
   private static final float COLLIDER_WIDTH = 0.9f;
   private static final float COLLIDER_HEIGHT = 0.9f;
+  private static final float EXIT_COLLIDER = 0.5f;
   private static final float EPSILON = 0.0001f;
 
   public MoveSystem() {
@@ -46,8 +48,7 @@ public class MoveSystem extends System {
                   colliderX,
                   colliderY,
                   COLLIDER_WIDTH,
-                  COLLIDER_HEIGHT,
-                  LevelLoader.getCurrentLevel().getLayout())) {
+                  COLLIDER_HEIGHT)) {
 
                 if (velX > 0) {
                   // hit wall on the RIGHT
@@ -72,8 +73,7 @@ public class MoveSystem extends System {
                   colliderX,
                   colliderY,
                   COLLIDER_WIDTH,
-                  COLLIDER_HEIGHT,
-                  LevelLoader.getCurrentLevel().getLayout())) {
+                  COLLIDER_HEIGHT)) {
 
                 if (velY > 0) {
                   // hit wall at the BOTTOM
@@ -100,11 +100,16 @@ public class MoveSystem extends System {
               }
 
               pc.setPosition(x, y);
+              colliderX = x + (1.0f - EXIT_COLLIDER) / 2.0f;
+              colliderY = y + (1.0f - EXIT_COLLIDER) / 2.0f;
+              if(collidesWithExit(colliderX,colliderY, EXIT_COLLIDER, EXIT_COLLIDER)) {
+                  LevelLoader.loadNextLevel();
+              }
             });
   }
 
   public static boolean collidesWithWorld(
-      float x, float y, float width, float height, HashMap<Point, Tile> world) {
+      float x, float y, float width, float height) {
     float left = x;
     float right = x + width;
     float top = y;
@@ -117,10 +122,7 @@ public class MoveSystem extends System {
 
     for (int tx = leftTile; tx <= rightTile; tx++) {
       for (int ty = topTile; ty <= bottomTile; ty++) {
-        Tile tile = world.get(new Point(tx, ty));
-          if(tile instanceof ExitTile) {
-              LevelLoader.loadNextLevel();
-          }
+        Tile tile = LevelLoader.getCurrentLevel().getLayout().get(new Point(tx, ty));
         if (tile != null && tile.isWallLike()) {
           return true;
         }
@@ -128,4 +130,27 @@ public class MoveSystem extends System {
     }
     return false;
   }
+
+    public static boolean collidesWithExit(
+            float x, float y, float width, float height) {
+        float left = x;
+        float right = x + width;
+        float top = y;
+        float bottom = y + height;
+
+        int leftTile = (int) Math.floor(left);
+        int rightTile = (int) Math.floor(right - EPSILON);
+        int topTile = (int) Math.floor(top);
+        int bottomTile = (int) Math.floor(bottom - EPSILON);
+
+        for (int tx = leftTile; tx <= rightTile; tx++) {
+            for (int ty = topTile; ty <= bottomTile; ty++) {
+                Tile currentTile = LevelLoader.getCurrentLevel().getLayout().get(new Point(tx, ty));
+                if (currentTile instanceof ExitTile) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }
