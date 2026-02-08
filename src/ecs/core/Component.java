@@ -11,7 +11,4 @@ public abstract class Component {
     }
   }
 
-  public static void addEntityToInternalComponent(Class<? extends Component> klass, UUID uuid) {
-    ECS.componentsToEntities.get(klass).add(uuid);
-  }
 }

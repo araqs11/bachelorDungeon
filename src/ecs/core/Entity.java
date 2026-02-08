@@ -17,7 +17,7 @@ public class Entity {
 
   public void addComponent(Component component) {
     components.put(component.getClass(), component);
-    Component.addEntityToInternalComponent(component.getClass(), this.uuid);
+    ECS.addEntityToInternalComponent(component.getClass(), this.uuid);
   }
 
   public String getName() {

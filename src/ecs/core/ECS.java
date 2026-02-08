@@ -44,4 +44,8 @@ public class ECS {
     componentsToEntities.values().forEach(set -> set.removeIf(uuid -> !uuid.equals(heroUUID)));
     allEntities.entrySet().removeIf(entry -> !entry.getKey().equals(heroUUID));
   }
+
+  public static void addEntityToInternalComponent(Class<? extends Component> klass, UUID uuid) {
+    componentsToEntities.get(klass).add(uuid);
+  }
 }
