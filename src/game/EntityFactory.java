@@ -45,7 +45,10 @@ public class EntityFactory {
     SkillComponent sc = new SkillComponent();
     sc.addSkill(new FireballSkill());
     player.addComponent(sc);
-    player.addComponent(new HealthComponent(10));
+    HealthComponent hc = new HealthComponent(32);
+    hc.setCurrentHealth(16);
+    hc.setRenderHealth(true);
+    player.addComponent(hc);
     Game.world().setCamera(new PositionCamera(player));
     return player;
   }
@@ -57,7 +60,9 @@ public class EntityFactory {
     StateMachine sm = new StateMachine();
     sm.addState(new State("idle", "entities/enemy.png"));
     dummy.addComponent(new DrawComponent(sm));
-    dummy.addComponent(new HealthComponent(5));
+    HealthComponent hc = new HealthComponent(5);
+    hc.setRenderHealth(true);
+    dummy.addComponent(hc);
     return dummy;
   }
 }

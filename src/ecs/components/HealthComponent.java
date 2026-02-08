@@ -11,11 +11,13 @@ public class HealthComponent extends Component {
     private int currentHealth;
     private int maxHealth;
     private Consumer<Entity> onDeath = (e) ->{};
+    private boolean renderHealth;
 
     public HealthComponent(int currentHealth, int maxHealth, Consumer<Entity> onDeath) {
         this.currentHealth = currentHealth;
         this.maxHealth = maxHealth;
         this.onDeath = onDeath;
+        this.renderHealth = false;
     }
 
     public HealthComponent(int health, Consumer<Entity> onDeath) {
@@ -55,5 +57,13 @@ public class HealthComponent extends Component {
 
     public Consumer<Entity> getOnDeath() {
         return onDeath;
+    }
+
+    public void setRenderHealth(boolean renderHealth) {
+        this.renderHealth = renderHealth;
+    }
+
+    public boolean isRenderHealth() {
+        return renderHealth;
     }
 }
