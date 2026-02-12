@@ -2,6 +2,7 @@ package game.level.levellogic;
 
 import ecs.components.PositionComponent;
 import ecs.core.ECS;
+import game.EntityFactory;
 import game.level.LevelLoader;
 import game.level.tiles.StarterTile;
 
@@ -22,6 +23,6 @@ public class LevelOne implements ILevel {
         ECS.getHero().fetch(PositionComponent.class).get().setPosition(point.getX(),point.getY());
       }
     });
-    //ECS.addEntity(EntityFactory.createDummy(3, 3));
+    ECS.addEntity(EntityFactory.createDummy(5, 5));
   }
 }

@@ -3,6 +3,7 @@ package ecs.systems;
 import ecs.components.PositionComponent;
 import ecs.components.ProjectileComponent;
 import ecs.components.VelocityComponent;
+import ecs.core.ECS;
 import ecs.core.System;
 import game.level.LevelLoader;
 import game.level.tiles.ExitTile;
@@ -102,7 +103,7 @@ public class MoveSystem extends System {
               pc.setPosition(x, y);
               colliderX = x + (1.0f - EXIT_COLLIDER) / 2.0f;
               colliderY = y + (1.0f - EXIT_COLLIDER) / 2.0f;
-              if(collidesWithExit(colliderX,colliderY, EXIT_COLLIDER, EXIT_COLLIDER)) {
+              if(collidesWithExit(colliderX,colliderY, EXIT_COLLIDER, EXIT_COLLIDER) && entity.equals(ECS.getHero())) {
                   LevelLoader.loadNextLevel();
               }
             });
