@@ -4,16 +4,21 @@ import de.gurkenlabs.litiengine.input.Input;
 import ecs.core.System;
 import util.input.InputHandler;
 
+import java.awt.event.MouseEvent;
+
 public class InputSystem extends System {
   @Override
   public void execute() {
     InputHandler.clearInputs();
-    InputHandler.input
+    InputHandler.getInput()
         .keySet()
         .forEach(
-            (a) -> {
-              if (Input.keyboard().isPressed(InputHandler.input.get(a).getKeycode())) {
-                InputHandler.input.get(a).setPressed(true);
+            (inputName) -> {
+              if (Input.keyboard().isPressed(InputHandler.getKeyCode(inputName))) {
+                InputHandler.setPressed(inputName);
+              }
+              if (Input.mouse().isLeftButtonPressed() && InputHandler.getKeyCode(inputName)== MouseEvent.BUTTON1) {
+                InputHandler.setPressed(inputName);
               }
             });
   }
