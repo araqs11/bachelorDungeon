@@ -2,6 +2,7 @@ import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.configuration.DisplayMode;
 import ecs.core.ECS;
 import ecs.systems.*;
+import game.AudioPlayer;
 import game.EntityFactory;
 import game.GameLoop;
 import game.level.LevelLoader;
@@ -29,6 +30,7 @@ public class Starter {
     InputHandler.init();
     createSystems();
     createTestEntities();
+    AudioPlayer.setVolume(0.1f);
   }
 
   private static void createSystems() {

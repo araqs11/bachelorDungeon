@@ -3,6 +3,7 @@ package game.skills;
 import ecs.components.*;
 import ecs.core.ECS;
 import ecs.core.Entity;
+import game.AudioPlayer;
 import util.Util;
 import util.Vector;
 import util.statemaschine.State;
@@ -41,5 +42,6 @@ public class FireballSkill extends Skill {
         };
     fireball.addComponent(cc);
     ECS.addEntity(fireball);
+    AudioPlayer.playSound("sounds/fireball.wav");
   }
 }
