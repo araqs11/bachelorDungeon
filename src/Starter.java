@@ -46,12 +46,6 @@ public class Starter {
     ECS.addSystem(new HealthSystem());
     ECS.addSystem(new LevelSystem());
     ECS.addSystem(new DrawSystem());
-    ECS.addSystem(()->{
-      ECS.getRelevantEntities(List.of(PlayerComponent.class))
-              .forEach(entity -> {
-                System.out.println(entity.getName());
-              });
-    });
   }
 
   private static void createTestEntities() {
