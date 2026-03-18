@@ -1,5 +1,6 @@
 import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.configuration.DisplayMode;
+import ecs.components.PlayerComponent;
 import ecs.core.ECS;
 import ecs.systems.*;
 import game.AudioPlayer;
@@ -8,6 +9,8 @@ import game.GameLoop;
 import game.level.LevelLoader;
 import game.level.levellogic.LevelOne;
 import game.level.levellogic.EmptyLevel;
+
+import java.util.List;
 import java.util.logging.Level;
 
 import game.level.levellogic.LevelTwo;
@@ -43,6 +46,12 @@ public class Starter {
     ECS.addSystem(new HealthSystem());
     ECS.addSystem(new LevelSystem());
     ECS.addSystem(new DrawSystem());
+    ECS.addSystem(()->{
+      ECS.getRelevantEntities(List.of(PlayerComponent.class))
+              .forEach(entity -> {
+                System.out.println(entity.getName());
+              });
+    });
   }
 
   private static void createTestEntities() {

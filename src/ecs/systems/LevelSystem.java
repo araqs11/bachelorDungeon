@@ -6,7 +6,7 @@ import game.GameLoop;
 import game.level.LevelLoader;
 
 /** Handles rendering the level from the LevelLoader. */
-public class LevelSystem extends System {
+public class LevelSystem implements System {
 
   @Override
   public void execute() {

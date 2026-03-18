@@ -7,7 +7,7 @@ import ecs.core.System;
 import java.util.List;
 import util.Vector;
 
-public class VelocitySystem extends System {
+public class VelocitySystem implements System {
 
   private final double FRICTION = 0.2;
   private final double STOP_LIMIT = 0.1;

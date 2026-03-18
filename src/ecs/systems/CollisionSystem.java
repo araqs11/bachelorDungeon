@@ -9,7 +9,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class CollisionSystem extends System {
+public class CollisionSystem implements System {
 
   private HashSet<Pair>   collisions = new HashSet<>();
   private HashSet<Pair>  newCollisions = new HashSet<>();

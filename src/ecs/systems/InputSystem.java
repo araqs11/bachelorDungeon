@@ -6,7 +6,7 @@ import util.input.InputHandler;
 
 import java.awt.event.MouseEvent;
 
-public class InputSystem extends System {
+public class InputSystem implements System {
   @Override
   public void execute() {
     InputHandler.clearInputs();

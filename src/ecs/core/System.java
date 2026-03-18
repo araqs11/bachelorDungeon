@@ -1,15 +1,9 @@
 package ecs.core;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.UUID;
-import java.util.stream.Stream;
-
-public abstract class System implements Task {
+public interface System extends Task {
 
   @Override
-  public Void call() {
+  public default Void call() {
     execute();
     return null;
   }

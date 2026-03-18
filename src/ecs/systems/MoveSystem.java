@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 
 /** Checks if the new position of the entity is allowed. */
-public class MoveSystem extends System {
+public class MoveSystem implements System {
 
   private static final float COLLIDER_WIDTH = 0.9f;
   private static final float COLLIDER_HEIGHT = 0.9f;

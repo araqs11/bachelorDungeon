@@ -13,7 +13,7 @@ import util.input.InputName;
 
 import java.util.List;
 
-public class PlayerInputSystem extends System {
+public class PlayerInputSystem implements System {
 
   private final double MOVEMENT_VELOCITY = 0.5;
 

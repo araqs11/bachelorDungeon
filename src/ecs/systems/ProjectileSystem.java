@@ -10,7 +10,7 @@ import ecs.core.System;
 
 import java.util.List;
 
-public class ProjectileSystem extends System {
+public class ProjectileSystem implements System {
 
 
   @Override

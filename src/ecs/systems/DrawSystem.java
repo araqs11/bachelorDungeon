@@ -11,7 +11,7 @@ import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.util.List;
 
-public class DrawSystem extends System {
+public class DrawSystem implements System {
 
 
   @Override
