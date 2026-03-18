@@ -2,7 +2,9 @@ package ecs.core;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Stream;
 
 /** Collection for all the */
 public class ECS {
@@ -51,4 +53,31 @@ public class ECS {
   public static void addEntityToInternalComponent(Class<? extends Component> klass, UUID uuid) {
     componentsToEntities.get(klass).add(uuid);
   }
+
+  private static HashSet<UUID> getRelevantUUIDs(List<Class<? extends Component>> listOfRelevantComponents) {
+    HashSet<UUID> listOfRelevantEntities = new HashSet<>();
+    // first check if every Component has been initialized, if yes continue, if no stop here since
+    // no fitting entities can be found
+    List<Class<? extends Component>> checkingList =
+            listOfRelevantComponents.stream().filter(ECS.componentsToEntities::containsKey).toList();
+    if (checkingList.size() == listOfRelevantComponents.size()) {
+
+      if (listOfRelevantComponents.isEmpty()) {
+        listOfRelevantEntities = new HashSet<>(ECS.allEntities.keySet());
+      } else if (listOfRelevantComponents.size() == 1) {
+        listOfRelevantEntities = ECS.componentsToEntities.get(listOfRelevantComponents.getFirst());
+      } else {
+        listOfRelevantEntities = ECS.componentsToEntities.get(listOfRelevantComponents.getFirst());
+        listOfRelevantComponents.stream()
+                .map(klass -> ECS.componentsToEntities.get(klass))
+                .forEach(listOfRelevantEntities::retainAll);
+      }
+    }
+    return listOfRelevantEntities;
+  }
+
+  public static Stream<Entity> getRelevantEntities(List<Class<? extends Component>> components) {
+    return ECS.getRelevantUUIDs(components).stream().map(uuid -> ECS.allEntities.get(uuid));
+  }
+
 }

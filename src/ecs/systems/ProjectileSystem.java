@@ -8,15 +8,14 @@ import ecs.core.ECS;
 import ecs.core.Entity;
 import ecs.core.System;
 
+import java.util.List;
+
 public class ProjectileSystem extends System {
 
-  public ProjectileSystem() {
-    super(ProjectileComponent.class);
-  }
 
   @Override
   public void execute() {
-    getRelevantEntities()
+    ECS.getRelevantEntities(List.of(ProjectileComponent.class))
         .forEach(
             entity -> {
               ProjectileComponent projectileComponent =

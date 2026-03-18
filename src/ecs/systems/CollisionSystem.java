@@ -2,6 +2,7 @@ package ecs.systems;
 
 import ecs.components.CollisionComponent;
 import ecs.components.PositionComponent;
+import ecs.core.ECS;
 import ecs.core.Entity;
 import ecs.core.System;
 import java.util.HashSet;
@@ -10,21 +11,15 @@ import java.util.stream.Collectors;
 
 public class CollisionSystem extends System {
 
-  private HashSet<Pair> collisions;
-  private HashSet<Pair> newCollisions;
-
-  public CollisionSystem() {
-    super(List.of(CollisionComponent.class, PositionComponent.class));
-    collisions = new HashSet<>();
-    newCollisions = new HashSet<>();
-  }
+  private HashSet<Pair>   collisions = new HashSet<>();
+  private HashSet<Pair>  newCollisions = new HashSet<>();
 
   @Override
   public void execute() {
     newCollisions.clear();
-    getRelevantEntities()
+    ECS.getRelevantEntities(List.of(CollisionComponent.class, PositionComponent.class))
         .flatMap(
-            e1 -> getRelevantEntities().filter(e2 -> !e1.equals(e2)).map(e2 -> new Pair(e1, e2)))
+            e1 -> ECS.getRelevantEntities(List.of(CollisionComponent.class, PositionComponent.class)).filter(e2 -> !e1.equals(e2)).map(e2 -> new Pair(e1, e2)))
         .collect(Collectors.toSet())
         .forEach(
             pair -> {

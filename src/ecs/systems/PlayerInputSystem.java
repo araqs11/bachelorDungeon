@@ -3,6 +3,7 @@ package ecs.systems;
 import ecs.components.PlayerComponent;
 import ecs.components.SkillComponent;
 import ecs.components.VelocityComponent;
+import ecs.core.ECS;
 import ecs.core.System;
 import game.GameLoop;
 import game.level.LevelLoader;
@@ -10,17 +11,16 @@ import util.Vector;
 import util.input.InputHandler;
 import util.input.InputName;
 
+import java.util.List;
+
 public class PlayerInputSystem extends System {
 
   private final double MOVEMENT_VELOCITY = 0.5;
 
-  public PlayerInputSystem() {
-    super(PlayerComponent.class);
-  }
 
   @Override
   public void execute() {
-    getRelevantEntities()
+      ECS.getRelevantEntities(List.of(PlayerComponent.class))
         .forEach(
             entity -> {
               VelocityComponent vc = entity.fetch(VelocityComponent.class).get();

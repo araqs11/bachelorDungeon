@@ -1,17 +1,18 @@
 package ecs.systems;
 
 import ecs.components.HealthComponent;
+import ecs.core.ECS;
 import ecs.core.System;
+
+import java.util.List;
 
 public class HealthSystem extends System {
 
-  public HealthSystem() {
-    super(HealthComponent.class);
-  }
+
 
   @Override
   public void execute() {
-    getRelevantEntities()
+      ECS.getRelevantEntities(List.of(HealthComponent.class))
         .forEach(
             entity -> {
               HealthComponent hc = entity.fetch(HealthComponent.class).get();

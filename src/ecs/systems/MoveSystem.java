@@ -21,13 +21,10 @@ public class MoveSystem extends System {
   private static final float EXIT_COLLIDER = 0.5f;
   private static final float EPSILON = 0.0001f;
 
-  public MoveSystem() {
-    super(List.of(VelocityComponent.class, PositionComponent.class));
-  }
 
   @Override
   public void execute() {
-    getRelevantEntities()
+    ECS.getRelevantEntities(List.of(VelocityComponent.class, PositionComponent.class))
         .forEach(
             entity -> {
               PositionComponent pc = entity.fetch(PositionComponent.class).get();

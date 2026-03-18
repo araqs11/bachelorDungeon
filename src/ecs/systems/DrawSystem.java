@@ -4,6 +4,7 @@ import de.gurkenlabs.litiengine.Game;
 import ecs.components.DrawComponent;
 import ecs.components.HealthComponent;
 import ecs.components.PositionComponent;
+import ecs.core.ECS;
 import ecs.core.System;
 import game.GameLoop;
 import java.awt.*;
@@ -12,13 +13,10 @@ import java.util.List;
 
 public class DrawSystem extends System {
 
-  public DrawSystem() {
-    super(List.of(DrawComponent.class, PositionComponent.class));
-  }
 
   @Override
   public void execute() {
-    getRelevantEntities()
+    ECS.getRelevantEntities(List.of(DrawComponent.class, PositionComponent.class))
         .forEach(
             entity -> {
               DrawComponent dc = entity.fetch(DrawComponent.class).get();

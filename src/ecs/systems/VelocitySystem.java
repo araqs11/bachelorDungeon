@@ -2,6 +2,7 @@ package ecs.systems;
 
 import ecs.components.PositionComponent;
 import ecs.components.VelocityComponent;
+import ecs.core.ECS;
 import ecs.core.System;
 import java.util.List;
 import util.Vector;
@@ -11,13 +12,9 @@ public class VelocitySystem extends System {
   private final double FRICTION = 0.2;
   private final double STOP_LIMIT = 0.1;
 
-  public VelocitySystem() {
-    super(List.of(VelocityComponent.class, PositionComponent.class));
-  }
-
   @Override
   public void execute() {
-    getRelevantEntities()
+    ECS.getRelevantEntities(List.of(VelocityComponent.class, PositionComponent.class))
         .forEach(
             entity -> {
               PositionComponent pc = entity.fetch(PositionComponent.class).get();

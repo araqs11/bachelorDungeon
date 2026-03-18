@@ -43,7 +43,6 @@ public class Starter {
     ECS.addSystem(new HealthSystem());
     ECS.addSystem(new LevelSystem());
     ECS.addSystem(new DrawSystem());
-    ECS.addSystem(new TestingSystem());
   }
 
   private static void createTestEntities() {
