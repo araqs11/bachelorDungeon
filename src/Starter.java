@@ -1,6 +1,8 @@
 import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.configuration.DisplayMode;
 import ecs.components.PlayerComponent;
+import ecs.components.RandomMoveBehaviourComponent;
+import ecs.components.VelocityComponent;
 import ecs.core.ECS;
 import ecs.systems.*;
 import game.AudioPlayer;
@@ -44,8 +46,17 @@ public class Starter {
     ECS.addSystem(new CollisionSystem());
     ECS.addSystem(new ProjectileSystem());
     ECS.addSystem(new HealthSystem());
+    ECS.addSystem(()-> {
+      ECS.getRelevantEntities(List.of(RandomMoveBehaviourComponent.class))
+              .forEach(entity -> {
+                VelocityComponent vc = entity.fetch(VelocityComponent.class).get();
+                RandomMoveBehaviourComponent move = entity.fetch(RandomMoveBehaviourComponent.class).get();
+                vc.addVelocity(move.randomMoveEverySecond());
+              });
+    });
     ECS.addSystem(new LevelSystem());
     ECS.addSystem(new DrawSystem());
+
   }
 
   private static void createTestEntities() {

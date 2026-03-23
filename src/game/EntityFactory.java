@@ -61,14 +61,23 @@ public class EntityFactory {
 
   public static Entity createDummy(int x, int y) {
     Entity dummy = new Entity("dummy");
-    dummy.addComponent(new PositionComponent(x, y));
-    dummy.addComponent(new CollisionComponent(Vector.of(1, 1)));
     StateMachine sm = new StateMachine();
     sm.addState(new State("idle", "entities/enemy.png"));
     dummy.addComponent(new DrawComponent(sm));
+    dummy.addComponent(new PositionComponent(x, y));
+    dummy.addComponent(new VelocityComponent(Vector.ZERO));
+    CollisionComponent cc = new CollisionComponent(Vector.of(1, 1));
+    cc.collideEnter =
+            (me, other) -> {
+              other.fetch(HealthComponent.class).ifPresent(hc->{
+                hc.reduce(1);
+              });
+            };
+    dummy.addComponent(cc);
     HealthComponent hc = new HealthComponent(5);
     hc.setRenderHealth(true);
     dummy.addComponent(hc);
+    dummy.addComponent(new RandomMoveBehaviourComponent());
     return dummy;
   }
 }
